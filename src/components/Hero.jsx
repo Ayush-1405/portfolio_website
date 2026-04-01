@@ -4,7 +4,7 @@ import { FiArrowDown, FiDownload, FiMail, FiGithub, FiLinkedin } from 'react-ico
 import { FaJava, FaReact } from 'react-icons/fa';
 import { SiSpringboot, SiFlutter } from 'react-icons/si';
 import heroImg from '../assets/hero.png';
-import resumePdf from '../assets/ayushmistryresume.pdf';
+import resumePdf from '../assets/Ayush Mistry Resume.pdf';
 
 
 const roles = [
