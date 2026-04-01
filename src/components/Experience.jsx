@@ -1,5 +1,4 @@
-import { motion } from 'framer-motion';
-import { FiMapPin, FiCalendar, FiCode } from 'react-icons/fi';
+import { FiMapPin, FiCalendar } from 'react-icons/fi';
 import { SiFlutter, SiMongodb, SiDart } from 'react-icons/si';
 import { FaJava } from 'react-icons/fa';
 
@@ -10,7 +9,6 @@ const experiences = [
     duration: 'Dec 2025 – Present',
     location: 'Anand, Gujarat',
     type: 'Internship',
-    color: 'from-cyan-500 to-blue-600',
     icons: [SiFlutter, SiDart, SiMongodb, FaJava],
     iconLabels: ['Flutter', 'Dart', 'MongoDB', 'Java'],
     iconColors: ['#54c5f8', '#0175c2', '#4db33d', '#f89820'],
@@ -26,116 +24,171 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="section-padding relative">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
-
+    <section id="experience" className="section-padding" style={{ background: 'var(--win-desktop)', padding: '8px 0' }}>
       <div className="container-custom">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-16"
-        >
-          <div className="section-tag justify-center mb-4">Professional Journey</div>
-          <h2 className="section-title">
-            Work <span className="gradient-text">Experience</span>
-          </h2>
-        </motion.div>
-
-        {/* Timeline */}
-        <div className="max-w-4xl mx-auto relative">
-          {/* Vertical connecting line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-indigo-500/50 via-purple-500/20 to-transparent hidden md:block rounded-full transform -translate-x-1/2" />
-          
-          <div className="space-y-20">
-            {experiences.map((exp, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.8, ease: 'easeOut' }}
-                className={`relative flex flex-col md:flex-row items-center ${i % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
-              >
-                {/* Timeline dot */}
-                <div className="absolute left-0 md:left-1/2 top-0 md:top-8 w-4 h-4 rounded-full bg-indigo-500 border-4 border-[var(--bg-primary)] shadow-[0_0_15px_rgba(99,102,241,0.5)] z-20 transform -translate-x-1/2 hidden md:block" />
-
-                {/* Content card */}
-                <div className="w-full md:w-[45%]">
-                  <motion.div
-                    whileHover={{ y: -5 }}
-                    className="glass-card p-8 rounded-3xl border border-white/5 hover:border-indigo-500/30 transition-all duration-300 relative group"
-                  >
-                    <div className="absolute top-4 right-6 flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                      <span className="text-green-400 text-[10px] font-bold uppercase tracking-widest">Active</span>
-                    </div>
-
-                    <div className="mb-8">
-                      <span className={`inline-block px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-[0.2em] bg-gradient-to-r ${exp.color} text-white mb-4 shadow-lg`}>
-                        {exp.type}
-                      </span>
-                      <h3 className="font-space font-bold text-3xl text-[var(--text-primary)] group-hover:text-indigo-400 transition-colors leading-tight mb-2">
-                        {exp.role}
-                      </h3>
-                      <p className="text-indigo-400 font-bold text-xl tracking-tight">{exp.company}</p>
-                    </div>
-
-                    <div className="flex flex-wrap gap-5 mb-8 text-xs text-[var(--text-secondary)] font-bold uppercase tracking-widest">
-                      <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-lg">
-                        <FiCalendar className="text-indigo-500" />
-                        <span className="font-code">{exp.duration}</span>
-                      </div>
-                      <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-lg">
-                        <FiMapPin className="text-indigo-500" />
-                        <span>{exp.location}</span>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 mb-8">
-                      {exp.icons.map((Icon, j) => (
-                        <div
-                          key={j}
-                          className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 border border-white/5 text-[10px] font-bold"
-                          style={{ color: exp.iconColors[j] }}
-                        >
-                          <Icon size={14} />
-                          {exp.iconLabels[j]}
-                        </div>
-                      ))}
-                    </div>
-
-                    <ul className="space-y-3">
-                      {exp.responsibilities.map((r, j) => (
-                        <li key={j} className="flex items-start gap-3 text-sm text-[var(--text-secondary)] leading-relaxed">
-                          <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-1.5 flex-shrink-0" />
-                          {r}
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                </div>
-
-                {/* Spacer for other side */}
-                <div className="hidden md:block md:w-[10%]" />
-                <div className="hidden md:block md:w-[45%]" />
-              </motion.div>
-            ))}
+        <div className="win-window">
+          {/* Title bar */}
+          <div className="win-titlebar">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{ fontSize: '12px' }}>&#128188;</span>
+              <span>Work Experience - Event Viewer</span>
+            </div>
+            <div style={{ display: 'flex', gap: '2px' }}>
+              <button className="win-titlebtn" aria-label="Minimize">_</button>
+              <button className="win-titlebtn" aria-label="Maximize">&#9633;</button>
+              <button className="win-titlebtn" aria-label="Close">X</button>
+            </div>
           </div>
 
-          {/* End marker */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="mt-16 flex justify-center"
-          >
-            <div className="glass-card px-6 py-3 rounded-2xl border border-dashed border-indigo-500/30 flex items-center gap-3">
-              <FiCode className="text-indigo-500" />
-              <p className="text-[var(--text-secondary)] text-sm font-code italic">Continuously learning and building...</p>
+          {/* Menu bar */}
+          <div className="win-menubar">
+            <span className="win-menuitem">Log</span>
+            <span className="win-menuitem">View</span>
+            <span className="win-menuitem">Options</span>
+            <span className="win-menuitem">Help</span>
+          </div>
+
+          <div style={{ display: 'flex', background: 'var(--win-btn-face)', height: '100%' }}>
+            {/* Left pane: log types */}
+            <div
+              className="win-sunken"
+              style={{
+                width: '160px',
+                flexShrink: 0,
+                background: 'var(--win-window)',
+                margin: '8px 0 8px 8px',
+                padding: '4px 0',
+                overflowY: 'auto',
+              }}
+              aria-label="Log type list"
+            >
+              {['Application', 'System', 'Security', 'Career'].map((item, i) => (
+                <div
+                  key={item}
+                  className={`win-listitem ${item === 'Career' ? 'selected' : ''}`}
+                  style={{ fontSize: '11px' }}
+                >
+                  <span aria-hidden="true">{i === 3 ? '>' : ' '}</span> {item}
+                </div>
+              ))}
             </div>
-          </motion.div>
+
+            {/* Right pane: event entries */}
+            <div style={{ flex: 1, padding: '8px', overflowX: 'auto' }}>
+              {/* Column headers */}
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '60px 1fr 160px 130px',
+                  gap: '0',
+                  marginBottom: '2px',
+                }}
+              >
+                {['Type', 'Description', 'Source', 'Date'].map((col) => (
+                  <div
+                    key={col}
+                    className="win-raised"
+                    style={{
+                      padding: '2px 8px',
+                      fontSize: '11px',
+                      fontWeight: 'bold',
+                      fontFamily: 'Tahoma',
+                      borderRight: '1px solid var(--win-btn-shadow)',
+                    }}
+                  >
+                    {col}
+                  </div>
+                ))}
+              </div>
+
+              {/* Entry row */}
+              {experiences.map((exp, i) => (
+                <div
+                  key={i}
+                  className="win-sunken"
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '60px 1fr 160px 130px',
+                    gap: '0',
+                    background: 'var(--win-window)',
+                    marginBottom: '1px',
+                    cursor: 'default',
+                  }}
+                >
+                  <div style={{ padding: '4px 8px', fontSize: '10px', fontFamily: 'Tahoma', borderRight: '1px solid #ddd', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <span style={{ color: '#00aa00', fontWeight: 'bold' }}>i</span>
+                    <span style={{ color: '#00aa00' }}>Active</span>
+                  </div>
+                  <div style={{ padding: '4px 8px', fontSize: '11px', fontWeight: 'bold', fontFamily: 'Tahoma', borderRight: '1px solid #ddd' }}>
+                    {exp.role}
+                  </div>
+                  <div style={{ padding: '4px 8px', fontSize: '11px', fontFamily: 'Tahoma', borderRight: '1px solid #ddd', color: '#316ac5' }}>
+                    {exp.company}
+                  </div>
+                  <div style={{ padding: '4px 8px', fontSize: '10px', fontFamily: 'Tahoma', fontFamily: 'Courier New' }}>
+                    {exp.duration}
+                  </div>
+                </div>
+              ))}
+
+              {/* Detail panel */}
+              {experiences.map((exp, i) => (
+                <div key={i} className="win-groupbox" style={{ marginTop: '10px' }}>
+                  <span className="win-groupbox-label">Event Detail</span>
+
+                  <div style={{ display: 'flex', gap: '12px', marginBottom: '10px', flexWrap: 'wrap' }}>
+                    <div className="win-raised" style={{ padding: '3px 10px', fontSize: '10px', fontFamily: 'Tahoma', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span style={{ color: '#00aa00', fontWeight: 'bold', fontSize: '12px' }}>&#10003;</span>
+                      {exp.type}
+                    </div>
+                    <div className="win-raised" style={{ padding: '3px 10px', fontSize: '10px', fontFamily: 'Tahoma', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <FiCalendar size={11} aria-hidden="true" /> {exp.duration}
+                    </div>
+                    <div className="win-raised" style={{ padding: '3px 10px', fontSize: '10px', fontFamily: 'Tahoma', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <FiMapPin size={11} aria-hidden="true" /> {exp.location}
+                    </div>
+                  </div>
+
+                  {/* Tech stack */}
+                  <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '10px' }}>
+                    {exp.icons.map((Icon, j) => (
+                      <div
+                        key={j}
+                        className="win-raised"
+                        style={{ padding: '3px 8px', fontSize: '10px', fontFamily: 'Tahoma', display: 'flex', alignItems: 'center', gap: '4px', color: exp.iconColors[j] }}
+                      >
+                        <Icon size={12} aria-hidden="true" /> {exp.iconLabels[j]}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Responsibilities as event log entries */}
+                  <div
+                    className="win-sunken"
+                    style={{ padding: '6px 8px', background: 'var(--win-window)', fontFamily: 'Courier New', fontSize: '11px' }}
+                  >
+                    {exp.responsibilities.map((r, j) => (
+                      <div key={j} style={{ display: 'flex', gap: '8px', marginBottom: '3px', lineHeight: '1.4' }}>
+                        <span style={{ color: '#316ac5', flexShrink: 0 }}>[{String(j + 1).padStart(2, '0')}]</span>
+                        <span style={{ color: '#000' }}>{r}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={{ marginTop: '8px', display: 'flex', justifyContent: 'flex-end', gap: '6px' }}>
+                    <button className="win-btn">Previous</button>
+                    <button className="win-btn">Next</button>
+                    <button className="win-btn win-btn-primary">Close</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="win-statusbar">
+            <div className="win-statusbar-pane" style={{ flex: 1 }}>Career log: {experiences.length} entry</div>
+            <div className="win-statusbar-pane">Status: Active</div>
+          </div>
         </div>
       </div>
     </section>

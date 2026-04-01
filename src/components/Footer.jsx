@@ -1,6 +1,4 @@
-import { motion } from 'framer-motion';
-import { FiGithub, FiLinkedin, FiMail, FiHeart } from 'react-icons/fi';
-import { FaCode } from 'react-icons/fa';
+import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
 
 const links = [
   { label: 'Home', href: '#home' },
@@ -22,92 +20,133 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative pt-20 pb-10 overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent" />
-      
-      <div className="container-custom relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          {/* Brand Section */}
-          <div className="md:col-span-2 space-y-6">
-            <a href="#home" className="flex items-center gap-3 group w-fit">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:rotate-12 transition-transform">
-                <FaCode className="text-white text-lg" />
-              </div>
-              <span className="font-space font-bold text-[var(--text-primary)] text-2xl tracking-tight">
-                Ayush<span className="text-indigo-500">.</span>
-              </span>
-            </a>
-            <p className="text-[var(--text-secondary)] text-sm leading-relaxed max-w-sm">
-              Passionate Full-Stack Developer focused on building high-performance backend systems and modern mobile experiences.
-              Let's create something meaningful together.
-            </p>
-            <div className="flex items-center gap-4">
-              {socials.map(({ href, Icon, label }) => (
-                <motion.a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  whileHover={{ y: -3, scale: 1.1 }}
-                  className="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-[var(--text-secondary)] hover:text-indigo-500 border border-white/5 transition-colors"
-                  aria-label={label}
-                >
-                  <Icon size={18} />
-                </motion.a>
-              ))}
+    <footer style={{ background: 'var(--win-desktop)', padding: '8px 0 42px' }}>
+      <div className="container-custom">
+        <div className="win-window">
+          {/* Title bar */}
+          <div className="win-titlebar win-titlebar-inactive">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{ fontSize: '12px' }}>&#128196;</span>
+              <span>Ayush Mistry - Portfolio Footer</span>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="space-y-6">
-            <h4 className="font-space font-bold text-[var(--text-primary)] uppercase tracking-widest text-xs">Quick Links</h4>
-            <ul className="space-y-3">
-              {links.slice(0, 4).map((link) => (
-                <li key={link.label}>
-                  <a 
-                    href={link.href} 
-                    className="text-sm text-[var(--text-secondary)] hover:text-indigo-500 transition-colors"
+          <div style={{ padding: '12px', background: 'var(--win-btn-face)' }}>
+            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginBottom: '10px' }}>
+              {/* Brand */}
+              <div style={{ flex: '2', minWidth: '200px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                  <div
+                    style={{
+                      width: '32px',
+                      height: '32px',
+                      background: 'linear-gradient(135deg, #0a246a, #316ac5)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#fff',
+                      fontWeight: 'bold',
+                      fontSize: '12px',
+                      fontFamily: 'Tahoma',
+                      border: '2px outset #808080',
+                    }}
+                    aria-hidden="true"
                   >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+                    AM
+                  </div>
+                  <span style={{ fontWeight: 'bold', fontSize: '14px', fontFamily: 'Tahoma' }}>
+                    Ayush Mistry
+                  </span>
+                </div>
+                <div
+                  className="win-sunken"
+                  style={{ padding: '6px', fontSize: '10px', fontFamily: 'Tahoma', lineHeight: '1.5', maxWidth: '300px' }}
+                >
+                  Passionate Full-Stack Developer focused on building high-performance backend systems
+                  and modern mobile experiences. Built with React &amp; Tailwind.
+                </div>
+                <div style={{ display: 'flex', gap: '4px', marginTop: '8px' }}>
+                  {socials.map(({ href, Icon, label }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="win-btn"
+                      style={{ minWidth: 'auto', padding: '2px 8px', gap: '4px' }}
+                      aria-label={label}
+                    >
+                      <Icon size={12} aria-hidden="true" /> {label}
+                    </a>
+                  ))}
+                </div>
+              </div>
 
-          {/* More Links */}
-          <div className="space-y-6">
-            <h4 className="font-space font-bold text-[var(--text-primary)] uppercase tracking-widest text-xs">Resources</h4>
-            <ul className="space-y-3">
-              {links.slice(4).map((link) => (
-                <li key={link.label}>
-                  <a 
-                    href={link.href} 
-                    className="text-sm text-[var(--text-secondary)] hover:text-indigo-500 transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+              {/* Quick Links */}
+              <div style={{ flex: 1, minWidth: '120px' }}>
+                <div style={{ fontWeight: 'bold', fontSize: '11px', fontFamily: 'Tahoma', marginBottom: '6px', borderBottom: '1px solid var(--win-btn-shadow)', paddingBottom: '3px' }}>
+                  Quick Links
+                </div>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                  {links.slice(0, 4).map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        style={{ fontSize: '11px', fontFamily: 'Tahoma', color: '#316ac5', textDecoration: 'underline', display: 'flex', alignItems: 'center', gap: '3px' }}
+                      >
+                        <span style={{ fontSize: '9px', color: '#666' }}>&#9658;</span>
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-        {/* Bottom Section */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="text-xs text-[var(--text-secondary)] font-medium">
-            © {currentYear} Ayush Mistry. All rights reserved.
-          </p>
-          <div className="flex items-center gap-2 text-xs text-[var(--text-secondary)] font-medium">
-            <span>Built with</span>
-            <FiHeart className="text-rose-500 animate-pulse" fill="currentColor" />
-            <span>using React & Tailwind</span>
+              {/* More Links */}
+              <div style={{ flex: 1, minWidth: '120px' }}>
+                <div style={{ fontWeight: 'bold', fontSize: '11px', fontFamily: 'Tahoma', marginBottom: '6px', borderBottom: '1px solid var(--win-btn-shadow)', paddingBottom: '3px' }}>
+                  Resources
+                </div>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                  {links.slice(4).map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        style={{ fontSize: '11px', fontFamily: 'Tahoma', color: '#316ac5', textDecoration: 'underline', display: 'flex', alignItems: 'center', gap: '3px' }}
+                      >
+                        <span style={{ fontSize: '9px', color: '#666' }}>&#9658;</span>
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="win-separator" />
+
+            {/* Copyright bar */}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '6px',
+                paddingTop: '6px',
+                fontSize: '10px',
+                fontFamily: 'Tahoma',
+                color: '#555',
+              }}
+            >
+              <span>Copyright &copy; {currentYear} Ayush Mistry. All rights reserved.</span>
+              <span style={{ fontFamily: 'Courier New' }}>
+                Microsoft Windows 2000 [Version 5.00.2195]
+              </span>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Background Decoration */}
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-600/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
     </footer>
   );
 }
