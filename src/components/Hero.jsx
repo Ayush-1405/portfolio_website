@@ -4,7 +4,7 @@ import { FiArrowDown, FiDownload, FiMail, FiGithub, FiLinkedin } from 'react-ico
 import { FaJava, FaReact } from 'react-icons/fa';
 import { SiSpringboot, SiFlutter } from 'react-icons/si';
 import heroImg from '../assets/hero.png';
-import resumePdf from '../assets/Ayush Mistry Resume.pdf';
+import resumePdf from '../assets/AyushMistryResume.pdf';
 
 
 const roles = [
@@ -128,7 +128,7 @@ export default function Hero() {
                   <FiArrowDown /> View Projects
                 </button>
                 <div className="flex items-center gap-3 w-full sm:w-auto">
-                  <a href={resumePdf} download="Ayush_Mistry_Resume.pdf" className="btn-outline !py-3 !px-8 text-sm border-white/10 flex-1 sm:flex-initial">
+                  <a href={resumePdf} download="AyushMistryResume.pdf" className="btn-outline !py-3 !px-8 text-sm border-white/10 flex-1 sm:flex-initial">
                     <FiDownload /> Resume
                   </a>
                   <button 
