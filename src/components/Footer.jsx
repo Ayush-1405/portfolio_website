@@ -19,98 +19,95 @@ const socials = [
 ];
 
 export default function Footer() {
-  const scrollTo = (href) => {
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative border-t border-[var(--glass-border)] pt-14 pb-8">
-      {/* Top gradient line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/60 to-transparent" />
-
-      <div className="container-custom">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
-          {/* Brand */}
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                <FaCode className="text-white text-base" />
+    <footer className="relative pt-20 pb-10 overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent" />
+      
+      <div className="container-custom relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+          {/* Brand Section */}
+          <div className="md:col-span-2 space-y-6">
+            <a href="#home" className="flex items-center gap-3 group w-fit">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:rotate-12 transition-transform">
+                <FaCode className="text-white text-lg" />
               </div>
-              <span className="font-space font-bold text-xl text-[var(--text-primary)]">
-                Ayush<span className="gradient-text">.</span>
+              <span className="font-space font-bold text-[var(--text-primary)] text-2xl tracking-tight">
+                Ayush<span className="text-indigo-500">.</span>
               </span>
-            </div>
-            <p className="text-[var(--text-secondary)] text-sm leading-relaxed max-w-xs">
-              Full-Stack Developer Intern crafting scalable backend systems, modern web apps, and cross-platform mobile solutions.
+            </a>
+            <p className="text-[var(--text-secondary)] text-sm leading-relaxed max-w-sm">
+              Passionate Full-Stack Developer focused on building high-performance backend systems and modern mobile experiences.
+              Let's create something meaningful together.
             </p>
-            <div className="flex items-center gap-2 mt-4">
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-green-400 text-xs font-code">Open to opportunities</span>
+            <div className="flex items-center gap-4">
+              {socials.map(({ href, Icon, label }) => (
+                <motion.a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  whileHover={{ y: -3, scale: 1.1 }}
+                  className="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-[var(--text-secondary)] hover:text-indigo-500 border border-white/5 transition-colors"
+                  aria-label={label}
+                >
+                  <Icon size={18} />
+                </motion.a>
+              ))}
             </div>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className="font-space font-semibold text-[var(--text-primary)] mb-4 text-sm">Quick Links</h4>
-            <ul className="flex flex-col gap-2">
-              {links.map(link => (
+          <div className="space-y-6">
+            <h4 className="font-space font-bold text-[var(--text-primary)] uppercase tracking-widest text-xs">Quick Links</h4>
+            <ul className="space-y-3">
+              {links.slice(0, 4).map((link) => (
                 <li key={link.label}>
-                  <button
-                    onClick={() => scrollTo(link.href)}
-                    className="text-[var(--text-secondary)] text-sm hover:text-indigo-400 transition-colors cursor-pointer flex items-center gap-2 group"
+                  <a 
+                    href={link.href} 
+                    className="text-sm text-[var(--text-secondary)] hover:text-indigo-500 transition-colors"
                   >
-                    <span className="w-1 h-1 rounded-full bg-indigo-500/50 group-hover:bg-indigo-400 transition-colors" />
                     {link.label}
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Tech Stack */}
-          <div>
-            <h4 className="font-space font-semibold text-[var(--text-primary)] mb-4 text-sm">Tech I Work With</h4>
-            <div className="flex flex-wrap gap-2">
-              {['Java', 'Spring Boot', 'Flutter', 'React', 'MySQL', 'MongoDB', 'REST APIs', 'JWT', 'Dart', 'Git'].map(tech => (
-                <span
-                  key={tech}
-                  className="px-2.5 py-1 text-xs glass-card border border-[var(--glass-border)] rounded-full text-[var(--text-secondary)]"
-                >
-                  {tech}
-                </span>
+          {/* More Links */}
+          <div className="space-y-6">
+            <h4 className="font-space font-bold text-[var(--text-primary)] uppercase tracking-widest text-xs">Resources</h4>
+            <ul className="space-y-3">
+              {links.slice(4).map((link) => (
+                <li key={link.label}>
+                  <a 
+                    href={link.href} 
+                    className="text-sm text-[var(--text-secondary)] hover:text-indigo-500 transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </li>
               ))}
-            </div>
-
-            {/* Social links */}
-            <div className="flex items-center gap-3 mt-6">
-              {socials.map(({ href, Icon, label }) => (
-                <motion.a
-                  key={label}
-                  href={href}
-                  target={href.startsWith('http') ? '_blank' : undefined}
-                  rel="noreferrer"
-                  whileHover={{ scale: 1.15, y: -2 }}
-                  className="w-9 h-9 glass-card border border-[var(--glass-border)] rounded-xl flex items-center justify-center text-[var(--text-secondary)] hover:text-indigo-400 transition-colors"
-                  aria-label={label}
-                >
-                  <Icon size={15} />
-                </motion.a>
-              ))}
-            </div>
+            </ul>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-[var(--glass-border)] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[var(--text-secondary)] text-xs flex items-center gap-1.5 text-center sm:text-left">
-            Designed &amp; Developed with <FiHeart className="text-red-400 translate-y-[1px]" size={12} /> by{' '}
-            <span className="gradient-text font-semibold">Ayush Mistry</span>
+        {/* Bottom Section */}
+        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
+          <p className="text-xs text-[var(--text-secondary)] font-medium">
+            © {currentYear} Ayush Mistry. All rights reserved.
           </p>
-          <p className="text-[var(--text-secondary)] text-xs font-code">
-            © {new Date().getFullYear()} · All rights reserved
-          </p>
+          <div className="flex items-center gap-2 text-xs text-[var(--text-secondary)] font-medium">
+            <span>Built with</span>
+            <FiHeart className="text-rose-500 animate-pulse" fill="currentColor" />
+            <span>using React & Tailwind</span>
+          </div>
         </div>
       </div>
+
+      {/* Background Decoration */}
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-600/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
     </footer>
   );
 }

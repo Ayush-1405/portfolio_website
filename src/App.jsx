@@ -27,7 +27,7 @@ export default function App() {
       <ParticleBackground />
       <div style={{ position: 'relative', zIndex: 1 }}>
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
-        <main>
+        <main className="flex flex-col gap-20 md:gap-40">
           <Hero />
           <About />
           <Skills />

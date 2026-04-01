@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaJava, FaReact, FaHtml5, FaCss3Alt, FaGitAlt, FaGithub, FaDatabase,
 } from 'react-icons/fa';
@@ -44,35 +44,43 @@ const skills = [
 function SkillCard({ skill, index }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
+      viewport={{ once: true }}
       transition={{ delay: index * 0.05, duration: 0.5 }}
-      whileHover={{ y: -5, scale: 1.02 }}
-      className="glass-card glow-border rounded-2xl p-5 group w-[calc(50%-0.5rem)] sm:w-[calc(33.333%-0.75rem)] md:w-[calc(25%-0.75rem)] lg:w-[calc(20%-0.8rem)] max-w-[240px] flex-shrink-0"
+      whileHover={{ y: -8, scale: 1.02 }}
+      className="glass-card p-6 rounded-2xl border border-white/5 hover:border-indigo-500/30 transition-all duration-300 group"
     >
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center gap-4 mb-4">
         <div
-          className="w-10 h-10 rounded-xl flex items-center justify-center"
-          style={{ background: `${skill.color}20` }}
+          className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform"
+          style={{ background: `${skill.color}20`, border: `1px solid ${skill.color}40` }}
         >
-          <skill.Icon style={{ color: skill.color, fontSize: '1.4rem' }} />
+          <skill.Icon style={{ color: skill.color, fontSize: '1.6rem' }} />
         </div>
         <div>
-          <h3 className="font-space font-semibold text-[var(--text-primary)] text-sm">{skill.name}</h3>
-          <span className="text-[var(--text-secondary)] text-xs">{skill.level}%</span>
+          <h3 className="font-space font-bold text-[var(--text-primary)] text-sm group-hover:text-indigo-400 transition-colors">{skill.name}</h3>
+          <span className="text-[var(--text-secondary)] text-[10px] font-bold uppercase tracking-wider">{skill.cat}</span>
         </div>
       </div>
 
-      <div className="w-full bg-white/5 rounded-full h-1.5 overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: `${skill.level}%` }}
-          viewport={{ once: true }}
-          transition={{ delay: index * 0.05 + 0.3, duration: 0.8, ease: 'easeOut' }}
-          className="h-full rounded-full"
-          style={{ background: `linear-gradient(90deg, ${skill.color}99, ${skill.color})` }}
-        />
+      <div className="space-y-3">
+        <div className="flex justify-between text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-[0.2em]">
+          <span>Proficiency</span>
+          <span className="text-indigo-400">{skill.level}%</span>
+        </div>
+        <div className="w-full bg-white/5 rounded-full h-2.5 overflow-hidden border border-white/5 p-[2px]">
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: `${skill.level}%` }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5, duration: 1.2, ease: 'circOut' }}
+            className="h-full rounded-full relative overflow-hidden"
+            style={{ background: `linear-gradient(90deg, ${skill.color}88, ${skill.color})` }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+          </motion.div>
+        </div>
       </div>
     </motion.div>
   );
@@ -84,7 +92,7 @@ export default function Skills() {
 
   return (
     <section id="skills" className="section-padding relative">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent" />
 
       <div className="container-custom">
         <motion.div
@@ -92,45 +100,39 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
           <div className="section-tag justify-center mb-4">Technical Arsenal</div>
-          <h2 className="section-title mb-4">
+          <h2 className="section-title">
             Skills & <span className="gradient-text">Technologies</span>
           </h2>
-          <p className="text-[var(--text-secondary)] max-w-xl mx-auto text-sm">
-            A comprehensive toolkit built through real-world projects and hands-on experience.
-          </p>
         </motion.div>
 
-        {/* Filter tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
-          {categories.map(cat => (
-            <motion.button
+        {/* Categories */}
+        <div className="flex flex-wrap justify-center gap-3 mb-16">
+          {categories.map((cat) => (
+            <button
               key={cat}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               onClick={() => setActive(cat)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all cursor-pointer border ${
+              className={`px-6 py-2.5 rounded-xl font-space font-bold text-sm transition-all duration-300 ${
                 active === cat
-                  ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/30 border-transparent'
-                  : 'bg-white/5 border-white/10 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-indigo-500/40 hover:bg-indigo-500/5'
+                  ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/40'
+                  : 'glass-card border border-white/5 text-[var(--text-secondary)] hover:text-indigo-400 hover:border-indigo-500/30'
               }`}
             >
               {cat}
-            </motion.button>
+            </button>
           ))}
         </div>
 
-        {/* Skills wrap */}
-        <motion.div
-          layout
-          className="flex flex-wrap justify-center gap-4"
-        >
-          {filtered.map((skill, i) => (
-            <SkillCard key={skill.name} skill={skill} index={i} />
-          ))}
-        </motion.div>
+        {/* Skills Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((skill, i) => (
+              <SkillCard key={skill.name} skill={skill} index={i} />
+            ))}
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );

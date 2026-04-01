@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FiMapPin, FiCalendar, FiExternalLink, FiCode } from 'react-icons/fi';
+import { FiMapPin, FiCalendar, FiCode } from 'react-icons/fi';
 import { SiFlutter, SiMongodb, SiDart } from 'react-icons/si';
 import { FaJava } from 'react-icons/fa';
 
@@ -27,7 +27,7 @@ const experiences = [
 export default function Experience() {
   return (
     <section id="experience" className="section-padding relative">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
 
       <div className="container-custom">
         <motion.div
@@ -37,92 +37,103 @@ export default function Experience() {
           transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <div className="section-tag justify-center mb-4">Work History</div>
+          <div className="section-tag justify-center mb-4">Professional Journey</div>
           <h2 className="section-title">
-            Professional <span className="gradient-text">Experience</span>
+            Work <span className="gradient-text">Experience</span>
           </h2>
         </motion.div>
 
         {/* Timeline */}
-        <div className="max-w-3xl mx-auto space-y-8 lg:space-y-6 relative">
+        <div className="max-w-4xl mx-auto relative">
           {/* Vertical connecting line */}
-          <div className="absolute left-[min(32px,10%)] md:left-0 top-16 bottom-8 w-px bg-gradient-to-b from-indigo-500/50 via-purple-500/20 to-transparent hidden md:block rounded-full z-0" />
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-indigo-500/50 via-purple-500/20 to-transparent hidden md:block rounded-full transform -translate-x-1/2" />
           
-          {experiences.map((exp, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ delay: i * 0.15, duration: 0.7 }}
-            >
+          <div className="space-y-20">
+            {experiences.map((exp, i) => (
               <motion.div
-                whileHover={{ y: -4 }}
-                className="glass-card glow-border rounded-2xl p-6 md:p-8 border-l-2 border-l-indigo-500 relative z-10"
+                key={i}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
+                className={`relative flex flex-col md:flex-row items-center ${i % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
               >
-                {/* Header */}
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5">
-                  <div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${exp.color} text-white`}>
+                {/* Timeline dot */}
+                <div className="absolute left-0 md:left-1/2 top-0 md:top-8 w-4 h-4 rounded-full bg-indigo-500 border-4 border-[var(--bg-primary)] shadow-[0_0_15px_rgba(99,102,241,0.5)] z-20 transform -translate-x-1/2 hidden md:block" />
+
+                {/* Content card */}
+                <div className="w-full md:w-[45%]">
+                  <motion.div
+                    whileHover={{ y: -5 }}
+                    className="glass-card p-8 rounded-3xl border border-white/5 hover:border-indigo-500/30 transition-all duration-300 relative group"
+                  >
+                    <div className="absolute top-4 right-6 flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                      <span className="text-green-400 text-[10px] font-bold uppercase tracking-widest">Active</span>
+                    </div>
+
+                    <div className="mb-8">
+                      <span className={`inline-block px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-[0.2em] bg-gradient-to-r ${exp.color} text-white mb-4 shadow-lg`}>
                         {exp.type}
                       </span>
-                      <span className="flex items-center gap-1.5 text-xs text-green-400 font-code">
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                        Currently Active
-                      </span>
+                      <h3 className="font-space font-bold text-3xl text-[var(--text-primary)] group-hover:text-indigo-400 transition-colors leading-tight mb-2">
+                        {exp.role}
+                      </h3>
+                      <p className="text-indigo-400 font-bold text-xl tracking-tight">{exp.company}</p>
                     </div>
-                    <h3 className="font-space font-bold text-xl text-[var(--text-primary)] mt-1">{exp.role}</h3>
-                    <p className="text-indigo-400 font-semibold text-base mt-1">{exp.company}</p>
-                  </div>
-                  <div className="flex flex-row sm:flex-col gap-3 sm:gap-1 sm:items-end text-[var(--text-secondary)] shrink-0">
-                    <div className="flex items-center gap-1.5">
-                      <FiCalendar size={13} />
-                      <span className="font-code text-xs">{exp.duration}</span>
+
+                    <div className="flex flex-wrap gap-5 mb-8 text-xs text-[var(--text-secondary)] font-bold uppercase tracking-widest">
+                      <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-lg">
+                        <FiCalendar className="text-indigo-500" />
+                        <span className="font-code">{exp.duration}</span>
+                      </div>
+                      <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-lg">
+                        <FiMapPin className="text-indigo-500" />
+                        <span>{exp.location}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <FiMapPin size={13} />
-                      <span className="text-xs">{exp.location}</span>
+
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      {exp.icons.map((Icon, j) => (
+                        <div
+                          key={j}
+                          className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 border border-white/5 text-[10px] font-bold"
+                          style={{ color: exp.iconColors[j] }}
+                        >
+                          <Icon size={14} />
+                          {exp.iconLabels[j]}
+                        </div>
+                      ))}
                     </div>
-                  </div>
+
+                    <ul className="space-y-3">
+                      {exp.responsibilities.map((r, j) => (
+                        <li key={j} className="flex items-start gap-3 text-sm text-[var(--text-secondary)] leading-relaxed">
+                          <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-1.5 flex-shrink-0" />
+                          {r}
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
                 </div>
 
-                {/* Tech badges */}
-                <div className="flex items-center gap-2 mb-5 flex-wrap">
-                  {exp.icons.map((Icon, j) => (
-                    <div
-                      key={j}
-                      className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium"
-                      style={{ background: `${exp.iconColors[j]}18`, color: exp.iconColors[j], border: `1px solid ${exp.iconColors[j]}30` }}
-                    >
-                      <Icon style={{ fontSize: '0.95rem' }} />
-                      {exp.iconLabels[j]}
-                    </div>
-                  ))}
-                </div>
-
-                {/* Responsibilities */}
-                <ul className="space-y-2.5">
-                  {exp.responsibilities.map((r, j) => (
-                    <li key={j} className="flex items-start gap-3 text-[var(--text-secondary)] text-sm leading-relaxed">
-                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-1.5 flex-shrink-0" />
-                      {r}
-                    </li>
-                  ))}
-                </ul>
+                {/* Spacer for other side */}
+                <div className="hidden md:block md:w-[10%]" />
+                <div className="hidden md:block md:w-[45%]" />
               </motion.div>
-            </motion.div>
-          ))}
+            ))}
+          </div>
 
-          {/* Future placeholder */}
+          {/* End marker */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
+            className="mt-16 flex justify-center"
           >
-            <div className="glass-card rounded-2xl p-4 border border-dashed border-indigo-500/20 flex items-center gap-3">
-              <FiCode className="text-indigo-500/50 flex-shrink-0" size={16} />
-              <p className="text-[var(--text-secondary)] text-sm font-code italic">Next chapter loading...</p>
+            <div className="glass-card px-6 py-3 rounded-2xl border border-dashed border-indigo-500/30 flex items-center gap-3">
+              <FiCode className="text-indigo-500" />
+              <p className="text-[var(--text-secondary)] text-sm font-code italic">Continuously learning and building...</p>
             </div>
           </motion.div>
         </div>

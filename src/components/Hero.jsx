@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FiArrowDown, FiDownload, FiMail, FiGithub, FiLinkedin } from 'react-icons/fi';
 import { FaJava, FaReact } from 'react-icons/fa';
 import { SiSpringboot, SiFlutter } from 'react-icons/si';
+import heroImg from '../assets/hero.png';
 
 const roles = [
   'Java Spring Boot Developer',
@@ -47,161 +48,193 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen pt-20 md:pt-0 flex items-center justify-center overflow-hidden"
     >
-      {/* Gradient orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-900/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Background elements */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Floating tech icons */}
       <div className="absolute inset-0 max-w-7xl mx-auto pointer-events-none hidden lg:block">
         {floatingIcons.map(({ Icon, color, x, y, delay }, i) => (
           <motion.div
             key={i}
-            className="absolute flex items-center justify-center w-14 h-14 glass-card rounded-xl pointer-events-auto"
+            className="absolute flex items-center justify-center w-16 h-16 glass-card rounded-2xl pointer-events-auto"
             style={{ left: x, top: y }}
             initial={{ opacity: 0, scale: 0 }}
             animate={{
-              opacity: [0.6, 1, 0.6],
-              scale: [1, 1.08, 1],
-              y: [0, -12, 0],
+              opacity: [0.4, 1, 0.4],
+              scale: [1, 1.1, 1],
+              y: [0, -15, 0],
             }}
             transition={{
               delay,
-              duration: 4,
+              duration: 5,
               repeat: Infinity,
               ease: 'easeInOut',
             }}
           >
-            <Icon style={{ color, fontSize: '1.8rem' }} />
+            <Icon style={{ color, fontSize: '2rem' }} />
           </motion.div>
         ))}
       </div>
 
-      <div className="container-custom relative z-10 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
-        >
-          {/* Tag */}
+      <div className="container-custom relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 items-center text-center lg:text-left">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+          >
+            {/* Tag */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="section-tag mb-10"
+            >
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <span>Available for opportunities</span>
+            </motion.div>
+
+            {/* Main heading */}
+            <div className="mb-8">
+              <p className="text-xl md:text-2xl font-space font-bold text-[var(--text-primary)] mb-2">Hi, I'm</p>
+              <h1 className="section-title">
+                Ayush Mistry
+              </h1>
+            </div>
+
+            {/* Typing effect */}
+            <div className="flex items-center justify-center lg:justify-start gap-3 text-2xl md:text-4xl font-bold mb-10 h-12">
+              <span className="font-code text-indigo-500">&gt;</span>
+              <span className="gradient-text">{displayed}</span>
+              <span className="w-1 h-8 bg-indigo-500 animate-pulse" />
+            </div>
+
+            {/* Subheading */}
+            <p className="text-[var(--text-secondary)] text-lg md:text-xl max-w-xl mb-12 leading-relaxed">
+              I build <span className="text-indigo-400 font-semibold">scalable backend systems</span>, secure REST APIs, and modern apps.
+              Focused on delivering <span className="text-purple-400 font-semibold">production-ready</span> solutions with Java & Flutter.
+            </p>
+
+            {/* CTA Buttons & Social links */}
+            <div className="flex flex-col gap-10">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                <button 
+                  onClick={scrollToProjects} 
+                  className="btn-primary w-full sm:w-auto"
+                >
+                  <FiArrowDown /> View Projects
+                </button>
+                <div className="flex items-center gap-3 w-full sm:w-auto">
+                  <a href="E:\ayush\portfolio\src\assets\ayushmistryresume.pdf" className="btn-outline !py-3 !px-8 text-sm border-white/10 flex-1 sm:flex-initial">
+                    <FiDownload /> Resume
+                  </a>
+                  <button 
+                    onClick={scrollToContact} 
+                    className="btn-outline !py-3 !px-8 text-sm border-white/10 flex-1 sm:flex-initial"
+                  >
+                    <FiMail /> Contact
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-center lg:justify-start gap-3">
+                {[
+                  { href: 'https://github.com/Ayush-1405', Icon: FiGithub, label: 'GitHub' },
+                  { href: 'https://www.linkedin.com/in/ayush-mistry14/', Icon: FiLinkedin, label: 'LinkedIn' },
+                  { href: 'mailto:ayushmistry0054@gmail.com', Icon: FiMail, label: 'Email' },
+                ].map(({ href, Icon, label }) => (
+                  <motion.a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    className="w-10 h-10 glass-card rounded-xl flex items-center justify-center text-[var(--text-secondary)] hover:text-indigo-500 transition-colors border border-white/5"
+                    aria-label={label}
+                  >
+                    <Icon size={18} />
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Hero Visual */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.1, duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-indigo-500/30 mb-6 text-sm"
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="hidden lg:flex justify-center relative"
           >
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="font-code text-indigo-500 font-medium dark:text-indigo-400 text-xs text-[var(--text-primary)]">Available for opportunities</span>
-          </motion.div>
-
-          {/* Main heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.7 }}
-            className="font-space text-4xl sm:text-6xl md:text-7xl font-bold text-[var(--text-primary)] mb-4 leading-tight"
-          >
-            Hi, I'm{' '}
-            <span className="gradient-text">Ayush Mistry</span>
-          </motion.h1>
-
-          {/* Typing effect */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.7 }}
-            className="flex items-center justify-center gap-2 text-lg md:text-2xl font-medium text-[var(--text-secondary)] mb-6 h-10 min-h-[2.5rem]"
-          >
-            <span className="font-code text-indigo-400">&gt;</span>
-            <span className="text-[var(--text-primary)]">{displayed}</span>
-            <span className="w-0.5 h-7 bg-indigo-400 animate-pulse" />
-          </motion.div>
-
-          {/* Subheading */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.7 }}
-            className="text-[var(--text-secondary)] text-base md:text-lg max-w-2xl mx-auto mb-8 leading-relaxed"
-          >
-            I build <span className="text-indigo-400 font-semibold">scalable backend systems</span>, secure REST APIs, and modern web & mobile apps.
-            Specializing in <span className="text-purple-400 font-semibold">Java Spring Boot</span>,
-            <span className="text-cyan-400 font-semibold"> Flutter</span>, JWT auth, MySQL, and MongoDB —
-            focused on <span className="text-indigo-400 font-semibold">production-ready</span> solutions.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.7 }}
-            className="flex flex-wrap items-center justify-center gap-3 mb-12"
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={scrollToProjects}
-              className="btn-primary"
-            >
-              <FiArrowDown className="inline" /> View Projects
-            </motion.button>
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href="#"
-              className="btn-outline"
-            >
-              <FiDownload /> Download Resume
-            </motion.a>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={scrollToContact}
-              className="btn-outline"
-            >
-              <FiMail /> Contact Me
-            </motion.button>
-          </motion.div>
-
-          {/* Social links */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.7 }}
-            className="flex items-center justify-center gap-4 mb-16"
-          >
-            {[
-              { href: 'https://github.com/Ayush-1405', Icon: FiGithub, label: 'GitHub' },
-              { href: 'https://www.linkedin.com/in/ayush-mistry14/', Icon: FiLinkedin, label: 'LinkedIn' },
-              { href: 'mailto:ayushmistry0054@gmail.com', Icon: FiMail, label: 'Email' },
-            ].map(({ href, Icon, label }) => (
-              <motion.a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                whileHover={{ scale: 1.15, y: -2 }}
-                className="w-10 h-10 glass-card glow-border rounded-xl flex items-center justify-center text-[var(--text-secondary)] hover:text-indigo-400 transition-colors"
-                aria-label={label}
+            <div className="relative w-[500px] h-[500px] flex items-center justify-center">
+              {/* Decorative rings */}
+              <div className="absolute inset-0 rounded-full border-2 border-dashed border-indigo-500/10 animate-spin-slow" />
+              <div className="absolute inset-12 rounded-full border border-purple-500/5 animate-reverse-spin-slow" />
+              
+              <div className="relative z-10 w-[380px] h-[380px] rounded-[40px] overflow-hidden glass-card p-3 group">
+                <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-purple-500/10 group-hover:opacity-50 transition-opacity" />
+                <img 
+                  src={heroImg} 
+                  alt="Ayush Mistry" 
+                  className="w-full h-full object-cover rounded-[32px] grayscale-[20%] group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+                />
+              </div>
+              
+              {/* Floating badges */}
+              <motion.div 
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute -top-4 -right-8 glass-card p-4 rounded-3xl border border-indigo-500/20 shadow-xl backdrop-blur-xl z-20"
               >
-                <Icon size={18} />
-              </motion.a>
-            ))}
-          </motion.div>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-2xl bg-indigo-500/20 flex items-center justify-center text-indigo-400">
+                    <SiSpringboot size={22} />
+                  </div>
+                  <div>
+                    <p className="text-[10px] text-[var(--text-secondary)] uppercase font-bold tracking-widest">Expertise</p>
+                    <p className="text-sm font-bold">Backend Architecture</p>
+                  </div>
+                </div>
+              </motion.div>
 
-          {/* Scroll indicator */}
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center gap-2 text-[var(--text-secondary)]"
-          >
-            <span className="font-code text-xs">scroll down</span>
-            <div className="w-5 h-8 border border-[var(--border-color)] rounded-full flex items-start justify-center pt-1.5">
-              <div className="w-1 h-2 bg-indigo-400 rounded-full animate-bounce" />
+              <motion.div 
+                animate={{ y: [0, 12, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+                className="absolute -bottom-4 -left-8 glass-card p-4 rounded-3xl border border-purple-500/20 shadow-xl backdrop-blur-xl z-20"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-2xl bg-purple-500/20 flex items-center justify-center text-purple-400">
+                    <SiFlutter size={22} />
+                  </div>
+                  <div>
+                    <p className="text-[10px] text-[var(--text-secondary)] uppercase font-bold tracking-widest">Expertise</p>
+                    <p className="text-sm font-bold">Mobile Solutions</p>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
+        </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3"
+        >
+          <span className="font-code text-[10px] uppercase tracking-[0.3em] text-[var(--text-secondary)] opacity-50">Scroll Down</span>
+          <div className="w-6 h-10 border-2 border-[var(--border-color)] rounded-full flex justify-center p-1.5 backdrop-blur-sm">
+            <motion.div 
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="w-1 h-2 bg-indigo-500 rounded-full" 
+            />
+          </div>
         </motion.div>
       </div>
     </section>
   );
 }
+

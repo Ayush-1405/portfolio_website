@@ -29,7 +29,7 @@ const education = [
 export default function Education() {
   return (
     <section id="education" className="section-padding relative">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
 
       <div className="container-custom">
         <motion.div
@@ -45,7 +45,7 @@ export default function Education() {
           </h2>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
           {education.map((edu, i) => (
             <motion.div
               key={i}
@@ -53,54 +53,56 @@ export default function Education() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ delay: i * 0.15, duration: 0.7 }}
-              whileHover={{ y: -6 }}
-              className="glass-card glow-border rounded-2xl overflow-hidden"
+              whileHover={{ y: -8 }}
+              className="glass-card rounded-3xl overflow-hidden border border-white/5 hover:border-indigo-500/30 transition-all duration-300 group h-full flex flex-col"
             >
               {/* Header gradient */}
-              <div className={`bg-gradient-to-br ${edu.gradient} p-6 relative overflow-hidden`}>
-                <div className="absolute top-0 right-0 w-32 h-32 border border-white/10 rounded-full -translate-y-16 translate-x-16" />
-                <div className="absolute bottom-0 left-0 w-20 h-20 border border-white/10 rounded-full translate-y-10 -translate-x-10" />
-                <div className="absolute right-2 bottom-0 text-[5.5rem] font-space font-black text-white/10 select-none pointer-events-none tracking-tighter leading-none opacity-40 dark:opacity-100">
+              <div className={`bg-gradient-to-br ${edu.gradient} p-8 relative overflow-hidden shrink-0`}>
+                <div className="absolute top-0 right-0 w-40 h-40 border border-white/10 rounded-full -translate-y-20 translate-x-20" />
+                <div className="absolute bottom-0 left-0 w-24 h-24 border border-white/10 rounded-full translate-y-12 -translate-x-12" />
+                <div className="absolute right-4 bottom-0 text-[6rem] font-space font-black text-white/10 select-none pointer-events-none tracking-tighter leading-none group-hover:scale-110 transition-transform duration-500">
                   {edu.short}
                 </div>
-                <div className="relative z-10 min-h-[4rem] flex flex-col justify-end">
-                  <h3 className="font-space font-bold text-white text-xl leading-tight w-4/5">{edu.degree}</h3>
+                
+                <div className="relative z-10 min-h-[5rem] flex flex-col justify-end">
+                  {edu.status === 'Ongoing' && (
+                    <div className="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full w-fit mb-4 border border-white/20">
+                      <span className="w-1.5 h-1.5 rounded-full bg-green-300 animate-pulse" />
+                      <span className="text-white text-[10px] font-bold uppercase tracking-widest">Ongoing</span>
+                    </div>
+                  )}
+                  <h3 className="font-space font-bold text-white text-2xl leading-tight md:w-4/5">{edu.degree}</h3>
                 </div>
-                {edu.status === 'Ongoing' && (
-                  <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-white/20 backdrop-blur-sm px-2.5 py-1 rounded-full">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-300 animate-pulse" />
-                    <span className="text-white text-xs font-semibold">Ongoing</span>
-                  </div>
-                )}
               </div>
 
-              <div className="p-6">
+              <div className="p-8 flex flex-col flex-grow">
                 {/* Institution */}
-                <div className="flex items-center gap-2 mb-2">
-                  <FiAward className="text-indigo-400 flex-shrink-0" size={15} />
-                  <span className="font-semibold text-[var(--text-primary)] text-sm">{edu.institution}</span>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 shrink-0">
+                    <FiAward size={20} />
+                  </div>
+                  <span className="font-space font-bold text-[var(--text-primary)] text-lg leading-tight">{edu.institution}</span>
                 </div>
 
-                {/* Meta */}
-                <div className="flex flex-wrap gap-3 mb-4 text-xs text-[var(--text-secondary)]">
-                  <div className="flex items-center gap-1">
-                    <FiCalendar size={12} />
+                <div className="flex flex-wrap gap-5 mb-8 text-xs text-[var(--text-secondary)] font-bold uppercase tracking-widest">
+                  <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-lg">
+                    <FiCalendar className="text-indigo-500" />
                     <span className="font-code">{edu.duration}</span>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <FiMapPin size={12} />
+                  <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-lg">
+                    <FiMapPin className="text-indigo-500" />
                     <span>{edu.location}</span>
                   </div>
                 </div>
 
-                <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-4">{edu.description}</p>
+                <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-8 flex-grow">{edu.description}</p>
 
                 {/* Highlights */}
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-2 mt-auto">
                   {edu.highlights.map(h => (
                     <span
                       key={h}
-                      className="px-2.5 py-1 text-xs bg-white/5 border border-[var(--glass-border)] rounded-full text-[var(--text-secondary)]"
+                      className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider bg-white/5 border border-white/5 rounded-xl text-[var(--text-secondary)] group-hover:text-indigo-400 group-hover:border-indigo-500/30 transition-colors"
                     >
                       {h}
                     </span>

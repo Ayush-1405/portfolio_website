@@ -34,7 +34,7 @@ export default function About() {
           </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-16">
+        <div className="grid lg:grid-cols-2 gap-16 items-center mb-24">
           {/* Left - Profile visual */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -43,17 +43,20 @@ export default function About() {
             transition={{ duration: 0.7 }}
             className="relative flex justify-center"
           >
-            <div className="relative w-72 h-72">
+            <div className="relative w-80 h-80">
               {/* Glow rings */}
-              <div className="absolute inset-0 rounded-full border-2 border-indigo-500/30 animate-spin" style={{ animationDuration: '12s' }} />
-              <div className="absolute inset-4 rounded-full border border-purple-500/20 animate-spin" style={{ animationDuration: '8s', animationDirection: 'reverse' }} />
+              <div className="absolute inset-0 rounded-full border-2 border-indigo-500/20 animate-spin-slow" />
+              <div className="absolute inset-6 rounded-full border border-purple-500/10 animate-reverse-spin-slow" />
 
               {/* Center card */}
-              <div className="absolute inset-8 glass-card rounded-full glow-border flex flex-col items-center justify-center gap-2">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-3xl font-space font-bold text-white shadow-lg shadow-indigo-500/40">
+              <div className="absolute inset-10 glass-card rounded-full flex flex-col items-center justify-center gap-2 shadow-2xl shadow-indigo-500/10 border border-indigo-500/20">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-4xl font-space font-bold text-white shadow-lg shadow-indigo-500/40">
                   AM
                 </div>
-                <span className="font-code text-xs text-indigo-400 text-center w-full block">Full-Stack<br/>Dev</span>
+                <div className="text-center">
+                  <p className="font-space font-bold text-sm tracking-tight">Ayush Mistry</p>
+                  <p className="font-code text-[10px] text-indigo-400">Full-Stack Dev</p>
+                </div>
               </div>
 
               {/* Orbit icons */}
@@ -65,20 +68,27 @@ export default function About() {
                 { Icon: SiMongodb, color: '#4db33d', angle: 288 },
               ].map(({ Icon, color, angle }, i) => {
                 const rad = (angle * Math.PI) / 180;
-                const r = 118;
-                const cx = 144, cy = 144;
+                const r = 135;
+                const cx = 160, cy = 160;
                 return (
                   <motion.div
                     key={i}
-                    className="absolute w-10 h-10 glass-card border border-[var(--glass-border)] rounded-xl flex items-center justify-center"
+                    className="absolute w-12 h-12 glass-card rounded-xl flex items-center justify-center border border-white/10 shadow-xl"
                     style={{
-                      left: cx + r * Math.cos(rad) - 20,
-                      top: cy + r * Math.sin(rad) - 20,
+                      left: cx + r * Math.cos(rad) - 24,
+                      top: cy + r * Math.sin(rad) - 24,
                     }}
-                    animate={{ y: [0, -4, 0] }}
-                    transition={{ duration: 2 + i * 0.4, repeat: Infinity, ease: 'easeInOut' }}
+                    animate={{ 
+                      y: [0, -6, 0],
+                      rotate: [0, 5, -5, 0]
+                    }}
+                    transition={{ 
+                      duration: 3 + i * 0.5, 
+                      repeat: Infinity, 
+                      ease: 'easeInOut' 
+                    }}
                   >
-                    <Icon style={{ color, fontSize: '1.2rem' }} />
+                    <Icon style={{ color, fontSize: '1.5rem' }} />
                   </motion.div>
                 );
               })}
@@ -92,59 +102,48 @@ export default function About() {
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.7 }}
           >
-            <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-6">
-              Experienced <span className="text-[var(--text-primary)] font-semibold">Full-Stack Developer Intern</span> with
-              hands-on experience in backend development using <span className="text-indigo-400 font-semibold">Java Spring Boot</span>,
-              REST APIs, <span className="text-purple-400 font-semibold">JWT authentication</span>, MySQL, MongoDB,
-              and role-based security.
-            </p>
-            <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-6">
-              Built real-world projects including an <span className="text-indigo-400 font-semibold">AI-based Career Path Advisor</span>,
-              an <span className="text-cyan-400 font-semibold">Online Examination System</span>, and a
-              <span className="text-purple-400 font-semibold"> Furniture Shop</span> e-commerce platform.
-            </p>
-            <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-8">
-              Also experienced in <span className="text-cyan-400 font-semibold">Flutter and Dart</span> for
-              cross-platform mobile app development — including UI design, API integration,
-              state management, and database connectivity.
-            </p>
-
-            {/* Stats */}
-            <div className="grid grid-cols-4 gap-3">
-              {stats.map(({ label, value, suffix }, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.5 }}
-                  className="glass-card glow-border rounded-xl p-3 text-center"
-                >
-                  <div className="font-space font-bold text-2xl gradient-text">{value}{suffix}</div>
-                  <div className="text-[var(--text-secondary)] text-xs mt-1">{label}</div>
-                </motion.div>
-              ))}
+            <div className="space-y-6">
+              <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
+                I am a passionate <span className="text-[var(--text-primary)] font-semibold">Full-Stack Developer</span> specializing in 
+                building high-performance backend systems and intuitive mobile experiences. My expertise lies in 
+                <span className="text-indigo-400 font-semibold"> Java Spring Boot</span> and 
+                <span className="text-cyan-400 font-semibold"> Flutter</span>.
+              </p>
+              <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
+                With a strong foundation in <span className="text-purple-400 font-semibold">RESTful architecture</span>, 
+                database management (MySQL & MongoDB), and secure authentication protocols, I focus on creating 
+                scalable, maintainable, and user-centric applications.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-4 pt-4">
+                {stats.map((stat, i) => (
+                  <div key={i} className="glass-card p-6 rounded-3xl border border-indigo-500/10 hover:border-indigo-500/30 transition-colors group">
+                    <p className="text-3xl font-space font-bold gradient-text group-hover:scale-110 transition-transform origin-left">{stat.value}{stat.suffix || ''}</p>
+                    <p className="text-[10px] text-[var(--text-secondary)] font-bold uppercase tracking-[0.2em] mt-1">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>
 
-        {/* Highlight cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12 md:mt-4">
-          {highlights.map(({ Icon, label, desc, color }, i) => (
+        {/* Highlight Cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {highlights.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
-              whileHover={{ y: -6, scale: 1.02 }}
-              className="glass-card glow-border rounded-2xl p-5 group cursor-default"
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ y: -5 }}
+              className="glass-card p-6 rounded-2xl border border-white/5 hover:border-indigo-500/30 transition-all duration-300 group"
             >
-              <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform`}>
-                <Icon className="text-white text-lg" />
+              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white mb-4 shadow-lg group-hover:scale-110 transition-transform`}>
+                <item.Icon size={24} />
               </div>
-              <h3 className="font-space font-semibold text-[var(--text-primary)] text-sm mb-1">{label}</h3>
-              <p className="text-[var(--text-secondary)] text-xs leading-relaxed">{desc}</p>
+              <h3 className="font-space font-bold text-[var(--text-primary)] mb-2">{item.label}</h3>
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{item.desc}</p>
             </motion.div>
           ))}
         </div>

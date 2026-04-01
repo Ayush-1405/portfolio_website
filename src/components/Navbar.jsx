@@ -19,130 +19,158 @@ export default function Navbar({ darkMode, setDarkMode }) {
   const [active, setActive] = useState('home');
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+      
       const sections = navLinks.map(l => l.href.replace('#', ''));
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
-        if (el && window.scrollY >= el.offsetTop - 120) {
-          setActive(sections[i]);
-          break;
+      const scrollPosition = window.scrollY + 150;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActive(section);
+            break;
+          }
         }
       }
     };
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNav = (href) => {
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
     setMobileOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    const target = document.querySelector(href);
+    if (target) {
+      const offset = 80;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = target.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
     <motion.nav
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'backdrop-blur-xl bg-[var(--bg-primary)]/80 border-b border-[var(--glass-border)] shadow-lg shadow-indigo-500/5'
-          : 'bg-transparent'
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled 
+          ? 'py-3 bg-[var(--bg-primary)]/70 backdrop-blur-xl border-b border-white/5 shadow-2xl shadow-indigo-500/5' 
+          : 'py-6 bg-transparent'
       }`}
     >
-      <div className="container-custom flex items-center justify-between h-16">
+      <div className="container-custom flex items-center justify-between">
         {/* Logo */}
-        <motion.a
-          href="#home"
-          onClick={() => handleNav('#home')}
-          className="flex items-center gap-2 cursor-pointer"
-          whileHover={{ scale: 1.05 }}
+        <a 
+          href="#home" 
+          onClick={(e) => handleNavClick(e, '#home')}
+          className="flex items-center gap-3 group"
         >
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-            <FaCode className="text-white text-sm" />
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-transform">
+            <FaCode className="text-white text-lg" />
           </div>
-          <span className="font-space font-bold text-[var(--text-primary)] text-lg">
-            Ayush<span className="gradient-text">.</span>
+          <span className="font-space font-bold text-[var(--text-primary)] text-xl tracking-tight">
+            Ayush<span className="text-indigo-500">.</span>
           </span>
-        </motion.a>
+        </a>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-2">
-          {navLinks.map(link => (
-            <button
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center gap-1 bg-white/5 p-1.5 rounded-2xl border border-white/5 backdrop-blur-md">
+          {navLinks.map((link) => (
+            <a
               key={link.label}
-              onClick={() => handleNav(link.href)}
-              className={`relative px-3 py-1.5 text-sm font-medium rounded-lg transition-all duration-200 cursor-pointer ${
+              href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
+              className={`relative px-4 py-2 text-xs font-bold transition-all duration-300 rounded-xl ${
                 active === link.href.replace('#', '')
-                  ? 'text-indigo-400'
+                  ? 'text-white'
                   : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
               }`}
             >
               {active === link.href.replace('#', '') && (
-                <motion.span
-                  layoutId="nav-active"
-                  className="absolute inset-0 bg-indigo-500/10 rounded-lg border border-indigo-500/20"
+                <motion.div
+                  layoutId="nav-pill"
+                  className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl shadow-lg shadow-indigo-500/40"
+                  style={{ zIndex: -1 }}
+                  transition={{ type: 'spring', duration: 0.6, bounce: 0.2 }}
                 />
               )}
-              {link.label}
-            </button>
+              <span className="relative z-10">{link.label}</span>
+            </a>
           ))}
         </div>
 
-        {/* Right controls */}
-        <div className="flex items-center gap-2">
+        {/* Right Actions */}
+        <div className="flex items-center gap-3">
           <motion.button
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setDarkMode(!darkMode)}
-            className="p-2 rounded-lg glass-card text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
-            aria-label="Toggle theme"
+            className="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-[var(--text-secondary)] hover:text-indigo-500 border border-white/5 transition-colors"
           >
             {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
           </motion.button>
 
-          <a href="#contact" onClick={() => handleNav('#contact')}>
+          <a 
+            href="#contact" 
+            onClick={(e) => handleNavClick(e, '#contact')}
+            className="hidden sm:block"
+          >
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="btn-primary hidden md:inline-flex text-sm py-2 px-4"
+              className="btn-primary !py-2.5 !px-8 text-sm !rounded-2xl"
             >
               Hire Me
             </motion.button>
           </a>
 
           <button
-            className="md:hidden p-2 text-[var(--text-secondary)] cursor-pointer"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
+            className="lg:hidden w-10 h-10 rounded-xl glass-card flex items-center justify-center text-[var(--text-secondary)] border border-white/5"
           >
-            {mobileOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+            {mobileOpen ? <FiX size={20} /> : <FiMenu size={20} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-card mx-4 mb-4 overflow-hidden"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-full left-0 right-0 mt-4 mx-4 lg:hidden"
           >
-            <div className="flex flex-col p-4 gap-1">
-              {navLinks.map(link => (
-                <button
-                  key={link.label}
-                  onClick={() => handleNav(link.href)}
-                  className={`px-4 py-2.5 text-sm font-medium rounded-lg text-left transition-all cursor-pointer ${
-                    active === link.href.replace('#', '')
-                      ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
-                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/5'
-                  }`}
-                >
-                  {link.label}
-                </button>
-              ))}
+            <div className="glass-card p-4 rounded-3xl border border-white/10 shadow-2xl shadow-black/50 overflow-hidden">
+              <div className="flex flex-col gap-2">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className={`px-6 py-4 rounded-2xl text-sm font-bold transition-all ${
+                      active === link.href.replace('#', '')
+                        ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg'
+                        : 'text-[var(--text-secondary)] hover:bg-white/5 hover:text-[var(--text-primary)]'
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
             </div>
           </motion.div>
         )}

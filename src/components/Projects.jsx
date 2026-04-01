@@ -93,109 +93,93 @@ function ProjectCard({ project, index }) {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20 }}
+      exit={{ opacity: 0, scale: 0.95 }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
-      whileHover={{ y: -8 }}
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
-      className="glass-card glow-border rounded-2xl overflow-hidden group flex flex-col"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className={`relative group ${project.featured ? 'md:col-span-2' : ''}`}
     >
-      {/* Project visual header */}
-      <div className={`relative h-44 bg-gradient-to-br ${project.gradient} p-6 overflow-hidden`}>
-        <div className="absolute inset-0 opacity-10">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute border border-white/20 rounded-full"
-              style={{
-                width: `${60 + i * 30}px`,
-                height: `${60 + i * 30}px`,
-                top: `${20 - i * 15}px`,
-                right: `${-10 - i * 10}px`,
-              }}
-            />
-          ))}
-        </div>
-        <div className="relative z-10">
-          <span className="text-5xl drop-shadow-lg">{project.bgPattern}</span>
-        </div>
-        {project.featured && (
-          <div className="absolute top-4 right-4 px-2.5 py-1 bg-white/20 backdrop-blur-sm rounded-full">
-            <span className="text-white text-xs font-bold tracking-wider">⭐ FEATURED</span>
-          </div>
-        )}
-        {/* Category badge */}
-        <div className="absolute bottom-4 left-6">
-          <span className="px-2.5 py-1 bg-black/30 backdrop-blur-sm rounded-full text-white text-xs font-semibold">
-            {project.category}
-          </span>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="p-6 flex flex-col flex-1">
-        <h3 className="font-space font-bold text-lg text-[var(--text-primary)] mb-0.5">{project.title}</h3>
-        <p className="text-indigo-400 text-sm font-medium mb-3">{project.subtitle}</p>
-        <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-4 flex-1">{project.description}</p>
-
-        {/* Feature pills */}
-        <div className="flex flex-wrap gap-1.5 mb-4">
-          {project.features.map(f => (
-            <span key={f} className="px-2 py-0.5 bg-white/5 border border-[var(--glass-border)] rounded-full text-xs text-[var(--text-secondary)]">
-              {f}
-            </span>
-          ))}
-        </div>
-
-        {/* Tech stack icons */}
-        <div className="flex items-center gap-2 mb-5 flex-wrap">
-          {project.tech.map(t => {
-            const tc = techIconMap[t];
-            if (!tc) return <span key={t} className="px-2 py-0.5 bg-indigo-500/10 border border-indigo-500/20 rounded text-xs text-indigo-400">{t}</span>;
-            return (
-              <div
-                key={t}
-                className="flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-medium"
-                style={{ background: `${tc.color}15`, color: tc.color }}
-                title={t}
-              >
-                <tc.Icon style={{ fontSize: '0.9rem' }} />
-                <span className="hidden sm:inline">{t}</span>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Action buttons */}
-        <div className="flex gap-3">
-          <motion.a
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            href={project.github}
-            target="_blank"
-            rel="noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-indigo-500/50 text-sm font-medium transition-all"
-          >
-            <FiGithub size={15} /> GitHub
-          </motion.a>
-          {project.live ? (
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href={project.live}
-              target="_blank"
-              rel="noreferrer"
-              className="flex-1 btn-primary justify-center py-2 text-sm"
-            >
-              <FiExternalLink size={15} /> Live Demo
-            </motion.a>
-          ) : (
-            <div className="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl bg-white/5 text-[var(--text-secondary)] text-sm opacity-50 cursor-not-allowed">
-              <FiExternalLink size={15} /> Coming Soon
+      <div className={`glass-card rounded-3xl overflow-hidden border border-white/5 h-full flex flex-col transition-all duration-500 ${hovered ? 'shadow-2xl shadow-indigo-500/10 border-indigo-500/30 -translate-y-2' : ''}`}>
+        {/* Project Header/Image Placeholder */}
+        <div className={`relative ${project.featured ? 'h-64 md:h-72' : 'h-48 md:h-52'} w-full overflow-hidden bg-gradient-to-br ${project.gradient} flex items-center justify-center p-8 transition-all duration-500`}>
+          <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
+          <div className={`text-8xl md:text-9xl opacity-20 group-hover:scale-110 transition-transform duration-700 ${hovered ? 'rotate-12' : ''}`}>{project.bgPattern}</div>
+          
+          {project.featured && (
+            <div className="absolute top-4 left-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30 text-[10px] font-bold text-white uppercase tracking-widest flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse" />
+              Featured Project
             </div>
           )}
+          
+          <div className="absolute bottom-4 right-4 flex gap-2">
+            <motion.a
+              href={project.github}
+              target="_blank"
+              rel="noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
+            >
+              <FiGithub size={18} />
+            </motion.a>
+            {project.live && (
+              <motion.a
+                href={project.live}
+                target="_blank"
+                rel="noreferrer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
+              >
+                <FiExternalLink size={18} />
+              </motion.a>
+            )}
+          </div>
+        </div>
+
+        {/* Project Content */}
+        <div className="p-8 flex-grow flex flex-col">
+          <div className="flex justify-between items-start mb-6">
+            <div>
+              <p className="text-[10px] font-bold text-indigo-400 uppercase tracking-[0.2em] mb-2">{project.category}</p>
+              <h3 className="text-2xl font-space font-bold text-[var(--text-primary)] leading-tight group-hover:text-indigo-400 transition-colors">
+                {project.title}
+              </h3>
+            </div>
+          </div>
+          
+          <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-8 line-clamp-3 group-hover:line-clamp-none transition-all duration-500">
+            {project.description}
+          </p>
+
+          <div className="mt-auto space-y-6">
+            <div className="flex flex-wrap gap-2">
+              {project.tech.map((t) => {
+                const config = techIconMap[t] || { Icon: null, color: '#6366f1' };
+                return (
+                  <div
+                    key={t}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/5 text-[10px] font-bold text-[var(--text-secondary)] hover:text-indigo-400 hover:border-indigo-500/30 transition-all cursor-default"
+                  >
+                    {config.Icon && <config.Icon style={{ color: config.color }} />}
+                    {t}
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/5">
+              {project.features.slice(0, 2).map((feat, i) => (
+                <div key={i} className="flex items-center gap-2 text-[10px] text-[var(--text-secondary)] font-bold uppercase tracking-wider">
+                  <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.6)]" />
+                  {feat}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -203,73 +187,64 @@ function ProjectCard({ project, index }) {
 }
 
 export default function Projects() {
-  const [activeFilter, setActiveFilter] = useState('All');
-  const filtered = activeFilter === 'All' ? projects : projects.filter(p => p.category === activeFilter);
+  const [active, setActive] = useState('All');
+  const filtered = active === 'All' ? projects : projects.filter(p => p.category === active || (active === 'Web' && p.category === 'Full-Stack'));
 
   return (
     <section id="projects" className="section-padding relative">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
-
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <div className="section-tag justify-center mb-4">Portfolio</div>
-          <h2 className="section-title mb-4">
-            Featured <span className="gradient-text">Projects</span>
+          <div className="section-tag justify-center mb-4">Featured Work</div>
+          <h2 className="section-title">
+            Creative <span className="gradient-text">Projects</span>
           </h2>
-          <p className="text-[var(--text-secondary)] max-w-xl mx-auto text-sm">
-            Real-world applications built with modern tech stacks, focusing on scalability, security, and clean architecture.
-          </p>
         </motion.div>
 
-        {/* Filter buttons */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
-          {filterCategories.map(f => (
-            <motion.button
-              key={f}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setActiveFilter(f)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all cursor-pointer border ${
-                activeFilter === f
-                  ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/30 border-transparent'
-                  : 'bg-white/5 border-white/10 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-indigo-500/40 hover:bg-indigo-500/5'
+        {/* Categories */}
+        <div className="flex flex-wrap justify-center gap-3 mb-16">
+          {filterCategories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActive(cat)}
+              className={`px-6 py-2.5 rounded-xl font-space font-bold text-sm transition-all duration-300 ${
+                active === cat
+                  ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/40'
+                  : 'glass-card border border-white/5 text-[var(--text-secondary)] hover:text-indigo-400 hover:border-indigo-500/30'
               }`}
             >
-              {f}
-            </motion.button>
+              {cat}
+            </button>
           ))}
         </div>
 
-        {/* Projects grid */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           <AnimatePresence mode="popLayout">
-            {filtered.map((proj, i) => (
-              <ProjectCard key={proj.id} project={proj} index={i} />
+            {filtered.map((project, i) => (
+              <ProjectCard key={project.id} project={project} index={i} />
             ))}
           </AnimatePresence>
-        </motion.div>
-
-        {/* GitHub CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mt-12"
+        </div>
+        
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="mt-20 text-center"
         >
-          <a
-            href="https://github.com/Ayush-1405"
-            target="_blank"
+          <a 
+            href="https://github.com/Ayush-1405" 
+            target="_blank" 
             rel="noreferrer"
-            className="btn-outline inline-flex"
+            className="btn-outline group"
           >
-            <FiGithub /> View All on GitHub
+            <span>View More on GitHub</span>
+            <FiGithub className="ml-2 group-hover:rotate-12 transition-transform" />
           </a>
         </motion.div>
       </div>
