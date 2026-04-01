@@ -126,7 +126,7 @@ export default function Hero() {
                   <FiArrowDown /> View Projects
                 </button>
                 <div className="flex items-center gap-3 w-full sm:w-auto">
-                  <a href="E:\ayush\portfolio\src\assets\ayushmistryresume.pdf" className="btn-outline !py-3 !px-8 text-sm border-white/10 flex-1 sm:flex-initial">
+                  <a href="./assets/ayushmistryresume.pdf" className="btn-outline !py-3 !px-8 text-sm border-white/10 flex-1 sm:flex-initial">
                     <FiDownload /> Resume
                   </a>
                   <button 
@@ -140,9 +140,9 @@ export default function Hero() {
 
               <div className="flex items-center justify-center lg:justify-start gap-3">
                 {[
-                  { href: 'https://github.com/Ayush-1405', Icon: FiGithub, label: 'GitHub' },
-                  { href: 'https://www.linkedin.com/in/ayush-mistry14/', Icon: FiLinkedin, label: 'LinkedIn' },
-                  { href: 'mailto:ayushmistry0054@gmail.com', Icon: FiMail, label: 'Email' },
+                  { href: import.meta.env.VITE_GITHUB, Icon: FiGithub, label: 'GitHub' },
+                  { href: import.meta.env.VITE_LINKEDIN, Icon: FiLinkedin, label: 'LinkedIn' },
+                  { href: `mailto:${import.meta.env.VITE_EMAIL}`, Icon: FiMail, label: 'Email' },
                 ].map(({ href, Icon, label }) => (
                   <motion.a
                     key={label}

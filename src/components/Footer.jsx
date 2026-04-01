@@ -13,9 +13,9 @@ const links = [
 ];
 
 const socials = [
-  { href: 'https://github.com/Ayush-1405', Icon: FiGithub, label: 'GitHub' },
-  { href: 'https://www.linkedin.com/in/ayush-mistry14/', Icon: FiLinkedin, label: 'LinkedIn' },
-  { href: 'mailto:ayushmistry0054@gmail.com', Icon: FiMail, label: 'Email' },
+  { href: import.meta.env.VITE_GITHUB, Icon: FiGithub, label: 'GitHub' },
+  { href: import.meta.env.VITE_LINKEDIN, Icon: FiLinkedin, label: 'LinkedIn' },
+  { href: `mailto:${import.meta.env.VITE_EMAIL}`, Icon: FiMail, label: 'Email' },
 ];
 
 export default function Footer() {

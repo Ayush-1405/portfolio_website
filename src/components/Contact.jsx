@@ -6,35 +6,35 @@ const contactInfo = [
   {
     Icon: FiMail,
     label: 'Email',
-    value: 'ayushmistry0054@gmail.com',
-    href: 'mailto:ayushmistry0054@gmail.com',
+    value: import.meta.env.VITE_EMAIL,
+    href: `mailto:${import.meta.env.VITE_EMAIL}`,
     color: 'from-indigo-500 to-blue-600',
   },
   {
     Icon: FiPhone,
     label: 'Phone',
-    value: '+91 7622831980',
-    href: 'tel:+917622831980',
+    value: import.meta.env.VITE_PHONE,
+    href: `tel:${import.meta.env.VITE_PHONE?.replace(/\s/g, '')}`,
     color: 'from-purple-500 to-pink-600',
   },
   {
     Icon: FiGithub,
     label: 'GitHub',
-    value: 'github.com/Ayush-1405',
-    href: 'https://github.com/Ayush-1405',
+    value: import.meta.env.VITE_GITHUB?.replace('https://', ''),
+    href: import.meta.env.VITE_GITHUB,
     color: 'from-gray-600 to-gray-800',
   },
   {
     Icon: FiLinkedin,
     label: 'LinkedIn',
-    value: 'linkedin.com/in/ayush-mistry14',
-    href: 'https://www.linkedin.com/in/ayush-mistry14/',
+    value: import.meta.env.VITE_LINKEDIN?.replace('https://www.linkedin.com/in/', '').replace('/', ''),
+    href: import.meta.env.VITE_LINKEDIN,
     color: 'from-blue-600 to-blue-700',
   },
   {
     Icon: FiMapPin,
     label: 'Location',
-    value: 'Gujarat, India',
+    value: import.meta.env.VITE_LOCATION,
     href: null,
     color: 'from-green-500 to-teal-600',
   },
@@ -55,7 +55,7 @@ export default function Contact() {
     await new Promise(r => setTimeout(r, 1000));
     
     // Format email content
-    const mailtoLink = `mailto:ayushmistry0054@gmail.com?subject=${encodeURIComponent(form.subject || 'Portfolio Contact Form')}&body=${encodeURIComponent(
+    const mailtoLink = `mailto:${import.meta.env.VITE_EMAIL}?subject=${encodeURIComponent(form.subject || 'Portfolio Contact Form')}&body=${encodeURIComponent(
       `From: ${form.name}\nReply-To: ${form.email}\n\nMessage:\n${form.message}`
     )}`;
     
