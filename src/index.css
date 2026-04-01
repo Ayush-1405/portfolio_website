@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+@import "tailwindcss";
+:root {
+  --bg-primary: #050816;
+  --bg-secondary: #0a0f1e;
+  --accent-blue: #6366f1;
+  --accent-purple: #8b5cf6;
+  --accent-cyan: #06b6d4;
+  --gradient-main: linear-gradient(135deg, #6366f1, #8b5cf6);
+  --gradient-subtle: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.15));
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --border-color: rgba(99,102,241,0.2);
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+}
+
+.light {
+  --bg-primary: #f8f9ff;
+  --bg-secondary: #eef2ff;
+  --accent-blue: #4f46e5;
+  --accent-purple: #7c3aed;
+  --gradient-main: linear-gradient(135deg, #4f46e5, #7c3aed);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --border-color: rgba(79,70,229,0.2);
+  --glass-bg: rgba(255,255,255,0.7);
+  --glass-border: rgba(79,70,229,0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-blue);
+  border-radius: 3px;
+}
+
+.font-space { font-family: 'Space Grotesk', sans-serif; }
+.font-code { font-family: 'Fira Code', monospace; }
+
+.gradient-text {
+  background: var(--gradient-main);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+}
+
+.glow-border {
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 20px rgba(99,102,241,0.1), inset 0 0 20px rgba(99,102,241,0.03);
+}
+
+.glow-border:hover {
+  border-color: rgba(99,102,241,0.5);
+  box-shadow: 0 0 40px rgba(99,102,241,0.2), inset 0 0 20px rgba(99,102,241,0.05);
+}
+
+.section-padding {
+  padding: 6rem 0;
+}
+
+.container-custom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.btn-primary {
+  background: var(--gradient-main);
+  color: white;
+  padding: 0.75rem 1.75rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.025em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 20px rgba(99,102,241,0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(99,102,241,0.5);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  padding: 0.75rem 1.75rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.025em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-outline:hover {
+  border-color: var(--accent-blue);
+  background: rgba(99,102,241,0.1);
+  transform: translateY(-2px);
+}
+
+.section-tag {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  color: var(--accent-blue);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.section-tag::before, .section-tag::after {
+  content: '';
+  display: inline-block;
+  width: 30px;
+  height: 1px;
+  background: var(--accent-blue);
+}
+
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.15;
+}
+
+/* Particle canvas */
+#particles-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scrollbar for light mode */
+.light ::-webkit-scrollbar-track {
+  background: #eef2ff;
+}
