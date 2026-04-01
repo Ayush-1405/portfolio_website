@@ -1,7 +1,4 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FiSun, FiMoon, FiMenu, FiX } from 'react-icons/fi';
-import { FaCode } from 'react-icons/fa';
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -13,18 +10,38 @@ const navLinks = [
   { label: 'Contact', href: '#contact' },
 ];
 
+function WinIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="1" y="1" width="6" height="6" fill="#FF0000"/>
+      <rect x="9" y="1" width="6" height="6" fill="#00FF00"/>
+      <rect x="1" y="9" width="6" height="6" fill="#0000FF"/>
+      <rect x="9" y="9" width="6" height="6" fill="#FFFF00"/>
+    </svg>
+  );
+}
+
+function Clock() {
+  const [time, setTime] = useState(new Date());
+  useEffect(() => {
+    const t = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(t);
+  }, []);
+  return (
+    <span style={{ fontFamily: 'Tahoma, sans-serif', fontSize: '11px' }}>
+      {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+    </span>
+  );
+}
+
 export default function Navbar({ darkMode, setDarkMode }) {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [active, setActive] = useState('home');
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-      
       const sections = navLinks.map(l => l.href.replace('#', ''));
       const scrollPosition = window.scrollY + 150;
-
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -36,7 +53,6 @@ export default function Navbar({ darkMode, setDarkMode }) {
         }
       }
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -46,135 +62,117 @@ export default function Navbar({ darkMode, setDarkMode }) {
     setMobileOpen(false);
     const target = document.querySelector(href);
     if (target) {
-      const offset = 80;
+      const offset = 40;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = target.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
       const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
   };
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled 
-          ? 'py-3 bg-[var(--bg-primary)]/70 backdrop-blur-xl border-b border-white/5 shadow-2xl shadow-indigo-500/5' 
-          : 'py-6 bg-transparent'
-      }`}
-    >
-      <div className="container-custom flex items-center justify-between">
-        {/* Logo */}
-        <a 
-          href="#home" 
-          onClick={(e) => handleNavClick(e, '#home')}
-          className="flex items-center gap-3 group"
-        >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-transform">
-            <FaCode className="text-white text-lg" />
-          </div>
-          <span className="font-space font-bold text-[var(--text-primary)] text-xl tracking-tight">
-            Ayush<span className="text-indigo-500">.</span>
-          </span>
-        </a>
+    <>
+      {/* Win2K Taskbar - fixed to bottom */}
+      <nav className="win-taskbar" role="navigation" aria-label="Main navigation">
+        {/* Start Button */}
+        <button className="win-start-btn" aria-label="Start menu">
+          <WinIcon />
+          <strong>Start</strong>
+        </button>
 
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-1 bg-white/5 p-1.5 rounded-2xl border border-white/5 backdrop-blur-md">
+        {/* Divider */}
+        <div style={{ width: '1px', height: '20px', background: '#808080', marginRight: '2px' }} />
+        <div style={{ width: '1px', height: '20px', background: '#ffffff', marginLeft: '0' }} />
+
+        {/* Nav quick-launch buttons (desktop) */}
+        <div className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className={`relative px-4 py-2 text-xs font-bold transition-all duration-300 rounded-xl ${
-                active === link.href.replace('#', '')
-                  ? 'text-white'
-                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-              }`}
+              className={`win-task-btn ${active === link.href.replace('#', '') ? 'active' : ''}`}
+              aria-current={active === link.href.replace('#', '') ? 'page' : undefined}
             >
-              {active === link.href.replace('#', '') && (
-                <motion.div
-                  layoutId="nav-pill"
-                  className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl shadow-lg shadow-indigo-500/40"
-                  style={{ zIndex: -1 }}
-                  transition={{ type: 'spring', duration: 0.6, bounce: 0.2 }}
-                />
-              )}
-              <span className="relative z-10">{link.label}</span>
+              {link.label}
             </a>
           ))}
         </div>
 
-        {/* Right Actions */}
-        <div className="flex items-center gap-3">
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={() => setDarkMode(!darkMode)}
-            className="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-[var(--text-secondary)] hover:text-indigo-500 border border-white/5 transition-colors"
-          >
-            {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
-          </motion.button>
+        {/* Mobile toggle */}
+        <button
+          className="win-task-btn lg:hidden"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-nav"
+        >
+          {mobileOpen ? 'Close' : 'Navigate'}
+        </button>
 
-          <a 
-            href="#contact" 
-            onClick={(e) => handleNavClick(e, '#contact')}
-            className="hidden sm:block"
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn-primary !py-2.5 !px-8 text-sm !rounded-2xl"
-            >
-              Hire Me
-            </motion.button>
-          </a>
-
+        {/* System Tray */}
+        <div className="win-systray" role="status" aria-label="System tray">
           <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden w-10 h-10 rounded-xl glass-card flex items-center justify-center text-[var(--text-secondary)] border border-white/5"
+            onClick={() => setDarkMode && setDarkMode(!darkMode)}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '11px',
+              fontFamily: 'Tahoma, sans-serif',
+              padding: '0 2px',
+            }}
+            title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            aria-label="Toggle display mode"
           >
-            {mobileOpen ? <FiX size={20} /> : <FiMenu size={20} />}
+            {darkMode ? '[Day]' : '[Ngt]'}
           </button>
+          <span aria-hidden="true">|</span>
+          <Clock />
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 mt-4 mx-4 lg:hidden"
-          >
-            <div className="glass-card p-4 rounded-3xl border border-white/10 shadow-2xl shadow-black/50 overflow-hidden">
-              <div className="flex flex-col gap-2">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className={`px-6 py-4 rounded-2xl text-sm font-bold transition-all ${
-                      active === link.href.replace('#', '')
-                        ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg'
-                        : 'text-[var(--text-secondary)] hover:bg-white/5 hover:text-[var(--text-primary)]'
-                    }`}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+      {/* Mobile Navigation popup (above taskbar) */}
+      {mobileOpen && (
+        <div
+          id="mobile-nav"
+          className="win-window lg:hidden"
+          style={{
+            position: 'fixed',
+            bottom: '34px',
+            left: '8px',
+            zIndex: 999,
+            minWidth: '180px',
+          }}
+          role="menu"
+        >
+          <div className="win-titlebar win-titlebar-inactive">
+            <span>Navigation</span>
+            <button
+              className="win-titlebtn"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Close navigation"
+            >
+              X
+            </button>
+          </div>
+          <div style={{ padding: '4px 0' }}>
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="win-listitem"
+                style={{ display: 'flex' }}
+                role="menuitem"
+              >
+                {active === link.href.replace('#', '') ? '> ' : '  '}
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 }

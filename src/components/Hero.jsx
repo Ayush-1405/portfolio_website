@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 import { FiArrowDown, FiDownload, FiMail, FiGithub, FiLinkedin } from 'react-icons/fi';
 import { FaJava, FaReact } from 'react-icons/fa';
 import { SiSpringboot, SiFlutter } from 'react-icons/si';
@@ -10,13 +9,6 @@ const roles = [
   'Flutter Developer',
   'Backend Engineer',
   'Full-Stack Developer',
-];
-
-const floatingIcons = [
-  { Icon: FaJava, color: '#f89820', x: '10%', y: '20%', delay: 0 },
-  { Icon: SiSpringboot, color: '#6db33f', x: '85%', y: '15%', delay: 0.5 },
-  { Icon: SiFlutter, color: '#54c5f8', x: '8%', y: '70%', delay: 1 },
-  { Icon: FaReact, color: '#61dafb', x: '88%', y: '65%', delay: 1.5 },
 ];
 
 export default function Hero() {
@@ -44,197 +36,206 @@ export default function Hero() {
   const scrollToContact = () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
 
   return (
-    <section
-      id="home"
-      className="relative min-h-screen pt-20 md:pt-0 flex items-center justify-center overflow-hidden"
-    >
-      {/* Background elements */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
+    <section id="home" style={{ padding: '16px', background: 'var(--win-desktop)' }}>
+      <div className="container-custom">
+        {/* Main Hero Window */}
+        <div className="win-window" style={{ maxWidth: '960px', margin: '0 auto' }}>
+          {/* Title bar */}
+          <div className="win-titlebar">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{ fontSize: '12px' }}>&#128187;</span>
+              <span>Ayush Mistry - Portfolio - Welcome</span>
+            </div>
+            <div style={{ display: 'flex', gap: '2px' }}>
+              <button className="win-titlebtn" aria-label="Minimize">_</button>
+              <button className="win-titlebtn" aria-label="Maximize">&#9633;</button>
+              <button className="win-titlebtn" style={{ background: '#c0392b', color: 'white', fontWeight: 'bold' }} aria-label="Close">X</button>
+            </div>
+          </div>
 
-      {/* Floating tech icons */}
-      <div className="absolute inset-0 max-w-7xl mx-auto pointer-events-none hidden lg:block">
-        {floatingIcons.map(({ Icon, color, x, y, delay }, i) => (
-          <motion.div
-            key={i}
-            className="absolute flex items-center justify-center w-16 h-16 glass-card rounded-2xl pointer-events-auto"
-            style={{ left: x, top: y }}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{
-              opacity: [0.4, 1, 0.4],
-              scale: [1, 1.1, 1],
-              y: [0, -15, 0],
-            }}
-            transition={{
-              delay,
-              duration: 5,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          >
-            <Icon style={{ color, fontSize: '2rem' }} />
-          </motion.div>
-        ))}
-      </div>
+          {/* Menu bar */}
+          <div className="win-menubar">
+            <span className="win-menuitem">File</span>
+            <span className="win-menuitem">Edit</span>
+            <span className="win-menuitem">View</span>
+            <span className="win-menuitem">Favorites</span>
+            <span className="win-menuitem">Tools</span>
+            <span className="win-menuitem">Help</span>
+          </div>
 
-      <div className="container-custom relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center text-center lg:text-left">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-          >
-            {/* Tag */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="section-tag mb-10"
+          {/* Toolbar */}
+          <div className="win-toolbar">
+            <button className="win-btn" style={{ minWidth: 'auto', padding: '2px 8px' }} onClick={() => window.scrollTo(0, 0)} aria-label="Back">Back</button>
+            <button className="win-btn" style={{ minWidth: 'auto', padding: '2px 8px' }} aria-label="Forward">Forward</button>
+            <div className="win-separator" style={{ width: '1px', height: '20px', margin: '0 4px' }} />
+            <div
+              className="win-sunken"
+              style={{ flex: 1, padding: '2px 6px', fontSize: '11px', fontFamily: 'Tahoma', display: 'flex', alignItems: 'center' }}
+              aria-label="Address bar"
             >
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              <span>Available for opportunities</span>
-            </motion.div>
-
-            {/* Main heading */}
-            <div className="mb-8">
-              <p className="text-xl md:text-2xl font-space font-bold text-[var(--text-primary)] mb-2">Hi, I'm</p>
-              <h1 className="section-title">
-                Ayush Mistry
-              </h1>
+              C:\Users\Ayush\Portfolio\index.html
             </div>
+            <button className="win-btn" style={{ minWidth: 'auto', padding: '2px 10px' }}>Go</button>
+          </div>
 
-            {/* Typing effect */}
-            <div className="flex items-center justify-center lg:justify-start gap-3 text-2xl md:text-4xl font-bold mb-10 h-12">
-              <span className="font-code text-indigo-500">&gt;</span>
-              <span className="gradient-text">{displayed}</span>
-              <span className="w-1 h-8 bg-indigo-500 animate-pulse" />
-            </div>
+          {/* Content area */}
+          <div style={{ background: 'var(--win-btn-face)', padding: '24px' }}>
+            <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
 
-            {/* Subheading */}
-            <p className="text-[var(--text-secondary)] text-lg md:text-xl max-w-xl mb-12 leading-relaxed">
-              I build <span className="text-indigo-400 font-semibold">scalable backend systems</span>, secure REST APIs, and modern apps.
-              Focused on delivering <span className="text-purple-400 font-semibold">production-ready</span> solutions with Java & Flutter.
-            </p>
-
-            {/* CTA Buttons & Social links */}
-            <div className="flex flex-col gap-10">
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                <button 
-                  onClick={scrollToProjects} 
-                  className="btn-primary w-full sm:w-auto"
+              {/* Left: Profile image */}
+              <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                <div
+                  className="win-sunken"
+                  style={{ width: '160px', height: '160px', overflow: 'hidden', padding: '3px' }}
                 >
-                  <FiArrowDown /> View Projects
-                </button>
-                <div className="flex items-center gap-3 w-full sm:w-auto">
-                  <a href="./assets/ayushmistryresume.pdf" className="btn-outline !py-3 !px-8 text-sm border-white/10 flex-1 sm:flex-initial">
-                    <FiDownload /> Resume
-                  </a>
-                  <button 
-                    onClick={scrollToContact} 
-                    className="btn-outline !py-3 !px-8 text-sm border-white/10 flex-1 sm:flex-initial"
+                  <img
+                    src={heroImg}
+                    alt="Ayush Mistry profile photo"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
+                </div>
+                {/* Status badge */}
+                <div
+                  className="win-raised"
+                  style={{
+                    padding: '3px 10px',
+                    fontSize: '10px',
+                    fontFamily: 'Tahoma',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    background: '#e8ffe8',
+                    borderColor: '#008000 #c0e0c0 #c0e0c0 #008000',
+                    width: '160px',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <span
+                    style={{
+                      width: '8px',
+                      height: '8px',
+                      borderRadius: '50%',
+                      background: '#00aa00',
+                      display: 'inline-block',
+                      border: '1px solid #006600',
+                    }}
+                  />
+                  Available
+                </div>
+              </div>
+
+              {/* Right: Info */}
+              <div style={{ flex: 1, minWidth: '260px' }}>
+                {/* Name section */}
+                <div className="win-groupbox" style={{ marginTop: 0 }}>
+                  <span className="win-groupbox-label">Personal Info</span>
+                  <div style={{ marginBottom: '8px' }}>
+                    <p style={{ fontSize: '10px', color: '#666', fontFamily: 'Tahoma' }}>Full Name:</p>
+                    <p style={{ fontSize: '22px', fontWeight: 'bold', fontFamily: 'Tahoma', color: '#000', lineHeight: 1.2 }}>
+                      Ayush Mistry
+                    </p>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: '10px', color: '#666', fontFamily: 'Tahoma' }}>Current Role:</p>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', height: '24px' }}>
+                      <span style={{ fontFamily: 'Courier New', fontSize: '13px', color: '#316ac5', fontWeight: 'bold' }}>
+                        C:\&gt;_
+                      </span>
+                      <span style={{ fontFamily: 'Courier New', fontSize: '13px', fontWeight: 'bold', color: '#000' }}>
+                        {displayed}
+                      </span>
+                      <span className="win-blink" style={{ fontFamily: 'Courier New', fontSize: '13px', fontWeight: 'bold' }}>|</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Description */}
+                <div
+                  className="win-sunken"
+                  style={{ padding: '8px', marginTop: '10px', fontSize: '11px', lineHeight: '1.5', fontFamily: 'Tahoma', color: '#000' }}
+                >
+                  I build <strong>scalable backend systems</strong>, secure REST APIs, and modern apps.
+                  Focused on delivering <strong>production-ready</strong> solutions with Java &amp; Flutter.
+                </div>
+
+                {/* Tech icons row */}
+                <div style={{ display: 'flex', gap: '8px', marginTop: '10px', flexWrap: 'wrap' }}>
+                  {[
+                    { Icon: FaJava, color: '#f89820', label: 'Java' },
+                    { Icon: SiSpringboot, color: '#6db33f', label: 'Spring' },
+                    { Icon: SiFlutter, color: '#54c5f8', label: 'Flutter' },
+                    { Icon: FaReact, color: '#61dafb', label: 'React' },
+                  ].map(({ Icon, color, label }) => (
+                    <div
+                      key={label}
+                      className="win-raised"
+                      style={{
+                        padding: '4px 8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        fontSize: '10px',
+                        fontFamily: 'Tahoma',
+                        cursor: 'default',
+                      }}
+                      title={label}
+                    >
+                      <Icon style={{ color, fontSize: '14px' }} aria-hidden="true" />
+                      {label}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Action buttons */}
+                <div style={{ display: 'flex', gap: '8px', marginTop: '14px', flexWrap: 'wrap' }}>
+                  <button className="win-btn win-btn-primary" onClick={scrollToProjects}>
+                    <FiArrowDown size={12} aria-hidden="true" /> View Projects
+                  </button>
+                  <a
+                    href="./assets/ayushmistryresume.pdf"
+                    className="win-btn"
+                    download
                   >
-                    <FiMail /> Contact
+                    <FiDownload size={12} aria-hidden="true" /> Resume
+                  </a>
+                  <button className="win-btn" onClick={scrollToContact}>
+                    <FiMail size={12} aria-hidden="true" /> Contact Me
                   </button>
                 </div>
-              </div>
 
-              <div className="flex items-center justify-center lg:justify-start gap-3">
-                {[
-                  { href: import.meta.env.VITE_GITHUB, Icon: FiGithub, label: 'GitHub' },
-                  { href: import.meta.env.VITE_LINKEDIN, Icon: FiLinkedin, label: 'LinkedIn' },
-                  { href: `mailto:${import.meta.env.VITE_EMAIL}`, Icon: FiMail, label: 'Email' },
-                ].map(({ href, Icon, label }) => (
-                  <motion.a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    className="w-10 h-10 glass-card rounded-xl flex items-center justify-center text-[var(--text-secondary)] hover:text-indigo-500 transition-colors border border-white/5"
-                    aria-label={label}
-                  >
-                    <Icon size={18} />
-                  </motion.a>
-                ))}
+                {/* Social links */}
+                <div style={{ display: 'flex', gap: '6px', marginTop: '10px', alignItems: 'center' }}>
+                  <span style={{ fontSize: '10px', fontFamily: 'Tahoma', color: '#444' }}>Links:</span>
+                  {[
+                    { href: import.meta.env.VITE_GITHUB, Icon: FiGithub, label: 'GitHub' },
+                    { href: import.meta.env.VITE_LINKEDIN, Icon: FiLinkedin, label: 'LinkedIn' },
+                    { href: `mailto:${import.meta.env.VITE_EMAIL}`, Icon: FiMail, label: 'Email' },
+                  ].map(({ href, Icon, label }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="win-btn"
+                      style={{ minWidth: 'auto', padding: '2px 8px', gap: '4px' }}
+                      aria-label={label}
+                    >
+                      <Icon size={12} aria-hidden="true" /> {label}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
-          </motion.div>
-
-          {/* Hero Visual */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="hidden lg:flex justify-center relative"
-          >
-            <div className="relative w-[500px] h-[500px] flex items-center justify-center">
-              {/* Decorative rings */}
-              <div className="absolute inset-0 rounded-full border-2 border-dashed border-indigo-500/10 animate-spin-slow" />
-              <div className="absolute inset-12 rounded-full border border-purple-500/5 animate-reverse-spin-slow" />
-              
-              <div className="relative z-10 w-[380px] h-[380px] rounded-[40px] overflow-hidden glass-card p-3 group">
-                <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-purple-500/10 group-hover:opacity-50 transition-opacity" />
-                <img 
-                  src={heroImg} 
-                  alt="Ayush Mistry" 
-                  className="w-full h-full object-cover rounded-[32px] grayscale-[20%] group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
-                />
-              </div>
-              
-              {/* Floating badges */}
-              <motion.div 
-                animate={{ y: [0, -12, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-4 -right-8 glass-card p-4 rounded-3xl border border-indigo-500/20 shadow-xl backdrop-blur-xl z-20"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-indigo-500/20 flex items-center justify-center text-indigo-400">
-                    <SiSpringboot size={22} />
-                  </div>
-                  <div>
-                    <p className="text-[10px] text-[var(--text-secondary)] uppercase font-bold tracking-widest">Expertise</p>
-                    <p className="text-sm font-bold">Backend Architecture</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                className="absolute -bottom-4 -left-8 glass-card p-4 rounded-3xl border border-purple-500/20 shadow-xl backdrop-blur-xl z-20"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-purple-500/20 flex items-center justify-center text-purple-400">
-                    <SiFlutter size={22} />
-                  </div>
-                  <div>
-                    <p className="text-[10px] text-[var(--text-secondary)] uppercase font-bold tracking-widest">Expertise</p>
-                    <p className="text-sm font-bold">Mobile Solutions</p>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3"
-        >
-          <span className="font-code text-[10px] uppercase tracking-[0.3em] text-[var(--text-secondary)] opacity-50">Scroll Down</span>
-          <div className="w-6 h-10 border-2 border-[var(--border-color)] rounded-full flex justify-center p-1.5 backdrop-blur-sm">
-            <motion.div 
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-1 h-2 bg-indigo-500 rounded-full" 
-            />
           </div>
-        </motion.div>
+
+          {/* Status bar */}
+          <div className="win-statusbar">
+            <div className="win-statusbar-pane" style={{ flex: 1 }}>Portfolio loaded successfully</div>
+            <div className="win-statusbar-pane">Java &amp; Flutter Developer</div>
+            <div className="win-statusbar-pane">Gujarat, India</div>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
-
