@@ -101,15 +101,15 @@ function ProjectCard({ project, index }) {
       onMouseLeave={() => setHovered(false)}
       className={`relative group ${project.featured ? 'md:col-span-2' : ''}`}
     >
-      <div className={`glass-card rounded-3xl overflow-hidden border border-white/5 h-full flex flex-col transition-all duration-500 ${hovered ? 'shadow-2xl shadow-indigo-500/10 border-indigo-500/30 -translate-y-2' : ''}`}>
+      <div className={`glass-card overflow-hidden border border-white/5 h-full flex flex-col transition-all duration-500 ${hovered ? 'shadow-2xl shadow-indigo-500/10 border-indigo-500/30 -translate-y-2' : ''}`}>
         {/* Project Header/Image Placeholder */}
         <div className={`relative ${project.featured ? 'h-64 md:h-72' : 'h-48 md:h-52'} w-full overflow-hidden bg-gradient-to-br ${project.gradient} flex items-center justify-center p-8 transition-all duration-500`}>
           <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
           <div className={`text-8xl md:text-9xl opacity-20 group-hover:scale-110 transition-transform duration-700 ${hovered ? 'rotate-12' : ''}`}>{project.bgPattern}</div>
           
           {project.featured && (
-            <div className="absolute top-4 left-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30 text-[10px] font-bold text-white uppercase tracking-widest flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse" />
+            <div className="absolute top-4 left-4 bg-white/20 backdrop-blur-md px-3 py-1 border border-white/30 text-[10px] font-bold text-white uppercase tracking-widest flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 bg-yellow-400 animate-pulse" />
               Featured Project
             </div>
           )}
@@ -121,7 +121,7 @@ function ProjectCard({ project, index }) {
               rel="noreferrer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
+              className="w-10 h-10 bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
             >
               <FiGithub size={18} />
             </motion.a>
@@ -132,7 +132,7 @@ function ProjectCard({ project, index }) {
                 rel="noreferrer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
+                className="w-10 h-10 bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
               >
                 <FiExternalLink size={18} />
               </motion.a>
@@ -140,29 +140,27 @@ function ProjectCard({ project, index }) {
           </div>
         </div>
 
-        {/* Project Content */}
-        <div className="p-8 flex-grow flex flex-col">
-          <div className="flex justify-between items-start mb-6">
-            <div>
-              <p className="text-[10px] font-bold text-indigo-400 uppercase tracking-[0.2em] mb-2">{project.category}</p>
-              <h3 className="text-2xl font-space font-bold text-[var(--text-primary)] leading-tight group-hover:text-indigo-400 transition-colors">
-                {project.title}
-              </h3>
-            </div>
+        {/* Project Content - Centered */}
+        <div className="p-8 flex-grow flex flex-col items-center text-center">
+          <div className="mb-6">
+            <p className="text-[10px] font-bold text-indigo-400 uppercase tracking-[0.2em] mb-2">{project.category}</p>
+            <h3 className="text-2xl font-space font-black text-[var(--text-primary)] leading-tight group-hover:text-indigo-400 transition-colors">
+              {project.title}
+            </h3>
           </div>
           
-          <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-8 line-clamp-3 group-hover:line-clamp-none transition-all duration-500">
+          <p className="text-[var(--text-secondary)] text-sm leading-relaxed mb-8 line-clamp-3 group-hover:line-clamp-none transition-all duration-500 max-w-sm">
             {project.description}
           </p>
 
-          <div className="mt-auto space-y-6">
-            <div className="flex flex-wrap gap-2">
+          <div className="mt-auto space-y-8 w-full">
+            <div className="flex flex-wrap justify-center gap-2">
               {project.tech.map((t) => {
                 const config = techIconMap[t] || { Icon: null, color: '#6366f1' };
                 return (
                   <div
                     key={t}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/5 text-[10px] font-bold text-[var(--text-secondary)] hover:text-indigo-400 hover:border-indigo-500/30 transition-all cursor-default"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/5 text-[10px] font-bold text-[var(--text-secondary)] hover:text-indigo-400 hover:border-indigo-500/30 transition-all cursor-default"
                   >
                     {config.Icon && <config.Icon style={{ color: config.color }} />}
                     {t}
@@ -171,10 +169,10 @@ function ProjectCard({ project, index }) {
               })}
             </div>
 
-            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/5">
+            <div className="grid grid-cols-2 gap-4 pt-6 border-t border-white/5">
               {project.features.slice(0, 2).map((feat, i) => (
-                <div key={i} className="flex items-center gap-2 text-[10px] text-[var(--text-secondary)] font-bold uppercase tracking-wider">
-                  <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.6)]" />
+                <div key={i} className="flex items-center justify-center gap-2 text-[10px] text-[var(--text-secondary)] font-bold uppercase tracking-wider">
+                  <div className="w-1.5 h-1.5 bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.6)]" />
                   {feat}
                 </div>
               ))}
@@ -206,13 +204,12 @@ export default function Projects() {
           </h2>
         </motion.div>
 
-        {/* Categories */}
         <div className="flex flex-wrap justify-center gap-3 mb-16">
           {filterCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className={`px-6 py-2.5 rounded-xl font-space font-bold text-sm transition-all duration-300 ${
+              className={`px-6 py-2.5 font-space font-bold text-sm transition-all duration-300 ${
                 active === cat
                   ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/40'
                   : 'glass-card border border-white/5 text-[var(--text-secondary)] hover:text-indigo-400 hover:border-indigo-500/30'
@@ -222,7 +219,7 @@ export default function Projects() {
             </button>
           ))}
         </div>
-
+        <br></br>
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           <AnimatePresence mode="popLayout">
@@ -231,7 +228,7 @@ export default function Projects() {
             ))}
           </AnimatePresence>
         </div>
-        
+        <br></br>
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

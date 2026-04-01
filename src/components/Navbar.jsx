@@ -77,7 +77,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
           onClick={(e) => handleNavClick(e, '#home')}
           className="flex items-center gap-3 group"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-transform">
+          <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-transform">
             <FaCode className="text-white text-lg" />
           </div>
           <span className="font-space font-bold text-[var(--text-primary)] text-xl tracking-tight">
@@ -86,24 +86,24 @@ export default function Navbar({ darkMode, setDarkMode }) {
         </a>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-1 bg-white/5 p-1.5 rounded-2xl border border-white/5 backdrop-blur-md">
+        <div className="hidden lg:flex items-center gap-2 bg-white/5 p-1.5 border border-white/10 backdrop-blur-md">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className={`relative px-4 py-2 text-xs font-bold transition-all duration-300 rounded-xl ${
+              className={`relative px-5 py-2 text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300 ${
                 active === link.href.replace('#', '')
                   ? 'text-white'
-                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                  : 'text-[var(--text-secondary)] hover:text-indigo-400'
               }`}
             >
               {active === link.href.replace('#', '') && (
                 <motion.div
                   layoutId="nav-pill"
-                  className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl shadow-lg shadow-indigo-500/40"
+                  className="absolute inset-0 border border-indigo-500/50 bg-indigo-500/10 shadow-[0_0_15px_rgba(99,102,241,0.2)]"
                   style={{ zIndex: -1 }}
-                  transition={{ type: 'spring', duration: 0.6, bounce: 0.2 }}
+                  transition={{ type: 'spring', duration: 0.6, bounce: 0.15 }}
                 />
               )}
               <span className="relative z-10">{link.label}</span>
@@ -117,7 +117,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setDarkMode(!darkMode)}
-            className="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-[var(--text-secondary)] hover:text-indigo-500 border border-white/5 transition-colors"
+            className="w-10 h-10 glass-card flex items-center justify-center text-[var(--text-secondary)] hover:text-indigo-500 border border-white/5 transition-colors"
           >
             {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
           </motion.button>
@@ -130,7 +130,7 @@ export default function Navbar({ darkMode, setDarkMode }) {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="btn-primary !py-2.5 !px-8 text-sm !rounded-2xl"
+              className="btn-primary !py-2.5 !px-8 text-sm"
             >
               Hire Me
             </motion.button>
@@ -138,43 +138,43 @@ export default function Navbar({ darkMode, setDarkMode }) {
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden w-10 h-10 rounded-xl glass-card flex items-center justify-center text-[var(--text-secondary)] border border-white/5"
+            className="lg:hidden w-10 h-10 glass-card flex items-center justify-center text-[var(--text-secondary)] border border-white/5"
           >
             {mobileOpen ? <FiX size={20} /> : <FiMenu size={20} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 mt-4 mx-4 lg:hidden"
-          >
-            <div className="glass-card p-4 rounded-3xl border border-white/10 shadow-2xl shadow-black/50 overflow-hidden">
-              <div className="flex flex-col gap-2">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className={`px-6 py-4 rounded-2xl text-sm font-bold transition-all ${
-                      active === link.href.replace('#', '')
-                        ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg'
-                        : 'text-[var(--text-secondary)] hover:bg-white/5 hover:text-[var(--text-primary)]'
-                    }`}
-                  >
-                    {link.label}
-                  </a>
-                ))}
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="absolute top-full left-0 right-0 mt-4 mx-4 lg:hidden"
+            >
+              <div className="glass-card p-4 border border-white/10 shadow-2xl shadow-black/50 overflow-hidden">
+                <div className="flex flex-col gap-2">
+                  {navLinks.map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className={`px-6 py-4 text-xs font-black uppercase tracking-[0.2em] transition-all ${
+                        active === link.href.replace('#', '')
+                          ? 'bg-indigo-500/10 text-white border-l-4 border-indigo-500 shadow-lg'
+                          : 'text-[var(--text-secondary)] hover:bg-white/5 hover:text-indigo-400'
+                      }`}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
     </motion.nav>
   );
 }

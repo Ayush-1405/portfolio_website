@@ -100,7 +100,7 @@ export default function Contact() {
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="glass-card p-8 rounded-3xl border border-white/5 relative overflow-hidden"
+              className="glass-card p-8 border border-white/5 relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-500/5 rounded-full -translate-y-12 translate-x-12" />
               <h3 className="font-space font-bold text-xl text-[var(--text-primary)] mb-4">Work Status</h3>
@@ -108,8 +108,8 @@ export default function Contact() {
                 Currently seeking <span className="text-indigo-400 font-semibold">full-time or internship</span> roles.
                 Available for interesting side projects and open-source contributions.
               </p>
-              <div className="flex items-center gap-3 px-4 py-2 rounded-xl bg-green-500/10 border border-green-500/20 w-fit">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <div className="flex items-center gap-3 px-4 py-2 bg-green-500/10 border border-green-500/20 w-fit">
+                <span className="w-2 h-2 bg-green-400 animate-pulse" />
                 <span className="text-green-400 text-xs font-bold uppercase tracking-widest">Open to new projects</span>
               </div>
             </motion.div>
@@ -128,9 +128,9 @@ export default function Contact() {
                       href={href}
                       target={href.startsWith('http') ? '_blank' : undefined}
                       rel="noreferrer"
-                      className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-white/5 hover:border-indigo-500/30 group transition-all duration-300"
+                      className="flex items-center gap-4 p-4 glass-card border border-white/5 hover:border-indigo-500/30 group transition-all duration-300"
                     >
-                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center shrink-0 shadow-lg group-hover:scale-110 transition-transform`}>
+                      <div className={`w-12 h-12 bg-gradient-to-br ${color} flex items-center justify-center shrink-0 shadow-lg group-hover:scale-110 transition-transform`}>
                         <Icon className="text-white text-lg" />
                       </div>
                       <div className="min-w-0">
@@ -139,8 +139,8 @@ export default function Contact() {
                       </div>
                     </a>
                   ) : (
-                    <div className="flex items-center gap-4 p-4 glass-card rounded-2xl border border-white/5">
-                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center shrink-0 shadow-lg`}>
+                    <div className="flex items-center gap-4 p-4 glass-card border border-white/5">
+                      <div className={`w-12 h-12 bg-gradient-to-br ${color} flex items-center justify-center shrink-0 shadow-lg`}>
                         <Icon className="text-white text-lg" />
                       </div>
                       <div>
@@ -163,7 +163,7 @@ export default function Contact() {
           >
             <form
               onSubmit={handleSubmit}
-              className="glass-card p-10 rounded-3xl border border-white/5 flex flex-col gap-6"
+              className="glass-card p-10 border border-white/5 flex flex-col gap-6"
             >
               <div className="mb-2">
                 <h3 className="font-space font-bold text-2xl text-[var(--text-primary)] mb-2">Send Message</h3>
@@ -180,7 +180,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     placeholder="Ayush Mistry"
-                    className="w-full px-5 py-3.5 rounded-2xl bg-white/5 border border-white/5 text-[var(--text-primary)] placeholder-[var(--text-secondary)]/30 text-sm focus:outline-none focus:border-indigo-500/50 focus:bg-white/[0.08] transition-all"
+                    className="w-full px-5 py-3.5 bg-white/5 border border-white/5 text-[var(--text-primary)] placeholder-[var(--text-secondary)]/30 text-sm focus:outline-none focus:border-indigo-500/50 focus:bg-white/[0.08] transition-all"
                   />
                 </div>
                 <div className="space-y-2">
@@ -192,7 +192,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     placeholder="ayush@example.com"
-                    className="w-full px-5 py-3.5 rounded-2xl bg-white/5 border border-white/5 text-[var(--text-primary)] placeholder-[var(--text-secondary)]/30 text-sm focus:outline-none focus:border-indigo-500/50 focus:bg-white/[0.08] transition-all"
+                    className="w-full px-5 py-3.5 bg-white/5 border border-white/5 text-[var(--text-primary)] placeholder-[var(--text-secondary)]/30 text-sm focus:outline-none focus:border-indigo-500/50 focus:bg-white/[0.08] transition-all"
                   />
                 </div>
               </div>
@@ -206,7 +206,7 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   placeholder="Let's build something amazing"
-                  className="w-full px-5 py-3.5 rounded-2xl bg-white/5 border border-white/5 text-[var(--text-primary)] placeholder-[var(--text-secondary)]/30 text-sm focus:outline-none focus:border-indigo-500/50 focus:bg-white/[0.08] transition-all"
+                  className="w-full px-5 py-3.5 bg-white/5 border border-white/5 text-[var(--text-primary)] placeholder-[var(--text-secondary)]/30 text-sm focus:outline-none focus:border-indigo-500/50 focus:bg-white/[0.08] transition-all"
                 />
               </div>
 
@@ -219,7 +219,7 @@ export default function Contact() {
                   required
                   rows={5}
                   placeholder="Tell me more about your project..."
-                  className="w-full px-5 py-3.5 rounded-2xl bg-white/5 border border-white/5 text-[var(--text-primary)] placeholder-[var(--text-secondary)]/30 text-sm focus:outline-none focus:border-indigo-500/50 focus:bg-white/[0.08] transition-all resize-none"
+                  className="w-full px-5 py-3.5 bg-white/5 border border-white/5 text-[var(--text-primary)] placeholder-[var(--text-secondary)]/30 text-sm focus:outline-none focus:border-indigo-500/50 focus:bg-white/[0.08] transition-all resize-none"
                 />
               </div>
 

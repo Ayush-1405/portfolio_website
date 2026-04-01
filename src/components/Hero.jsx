@@ -91,7 +91,7 @@ export default function Hero() {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="section-tag mb-10"
             >
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <span className="w-2 h-2 bg-green-400 animate-pulse" />
               <span>Available for opportunities</span>
             </motion.div>
 
@@ -150,7 +150,7 @@ export default function Hero() {
                     target="_blank"
                     rel="noreferrer"
                     whileHover={{ scale: 1.1, y: -2 }}
-                    className="w-10 h-10 glass-card rounded-xl flex items-center justify-center text-[var(--text-secondary)] hover:text-indigo-500 transition-colors border border-white/5"
+                    className="w-10 h-10 glass-card flex items-center justify-center text-[var(--text-secondary)] hover:text-indigo-500 transition-colors border border-white/5"
                     aria-label={label}
                   >
                     <Icon size={18} />
@@ -172,12 +172,12 @@ export default function Hero() {
               <div className="absolute inset-0 rounded-full border-2 border-dashed border-indigo-500/10 animate-spin-slow" />
               <div className="absolute inset-12 rounded-full border border-purple-500/5 animate-reverse-spin-slow" />
               
-              <div className="relative z-10 w-[380px] h-[380px] rounded-[40px] overflow-hidden glass-card p-3 group">
+              <div className="relative z-10 w-[380px] h-[380px] overflow-hidden glass-card p-3 group">
                 <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-purple-500/10 group-hover:opacity-50 transition-opacity" />
                 <img 
                   src={heroImg} 
                   alt="Ayush Mistry" 
-                  className="w-full h-full object-cover rounded-[32px] grayscale-[20%] group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
+                  className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
                 />
               </div>
               
@@ -185,10 +185,10 @@ export default function Hero() {
               <motion.div 
                 animate={{ y: [0, -12, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-4 -right-8 glass-card p-4 rounded-3xl border border-indigo-500/20 shadow-xl backdrop-blur-xl z-20"
+                className="absolute -top-4 -right-8 glass-card p-4 border border-indigo-500/20 shadow-xl backdrop-blur-xl z-20"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-indigo-500/20 flex items-center justify-center text-indigo-400">
+                  <div className="w-10 h-10 bg-indigo-500/20 flex items-center justify-center text-indigo-400">
                     <SiSpringboot size={22} />
                   </div>
                   <div>
@@ -201,10 +201,10 @@ export default function Hero() {
               <motion.div 
                 animate={{ y: [0, 12, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                className="absolute -bottom-4 -left-8 glass-card p-4 rounded-3xl border border-purple-500/20 shadow-xl backdrop-blur-xl z-20"
+                className="absolute -bottom-4 -left-8 glass-card p-4 border border-purple-500/20 shadow-xl backdrop-blur-xl z-20"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-purple-500/20 flex items-center justify-center text-purple-400">
+                  <div className="w-10 h-10 bg-purple-500/20 flex items-center justify-center text-purple-400">
                     <SiFlutter size={22} />
                   </div>
                   <div>

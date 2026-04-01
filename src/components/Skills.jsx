@@ -49,11 +49,11 @@ function SkillCard({ skill, index }) {
       viewport={{ once: true }}
       transition={{ delay: index * 0.05, duration: 0.5 }}
       whileHover={{ y: -8, scale: 1.02 }}
-      className="glass-card p-6 rounded-2xl border border-white/5 hover:border-indigo-500/30 transition-all duration-300 group"
+      className="glass-card p-6 border border-white/5 hover:border-indigo-500/30 transition-all duration-300 group"
     >
       <div className="flex items-center gap-4 mb-4">
         <div
-          className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform"
+          className="w-12 h-12 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform"
           style={{ background: `${skill.color}20`, border: `1px solid ${skill.color}40` }}
         >
           <skill.Icon style={{ color: skill.color, fontSize: '1.6rem' }} />
@@ -107,24 +107,39 @@ export default function Skills() {
             Skills & <span className="gradient-text">Technologies</span>
           </h2>
         </motion.div>
-
+          
         {/* Categories */}
-        <div className="flex flex-wrap justify-center gap-3 mb-16">
+        <div className="flex flex-wrap justify-center gap-4 mb-20">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className={`px-6 py-2.5 rounded-xl font-space font-bold text-sm transition-all duration-300 ${
+              className={`relative px-8 py-3 font-space font-black text-[11px] uppercase tracking-[0.2em] transition-all duration-500 group overflow-hidden ${
                 active === cat
-                  ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/40'
-                  : 'glass-card border border-white/5 text-[var(--text-secondary)] hover:text-indigo-400 hover:border-indigo-500/30'
+                  ? 'text-white'
+                  : 'text-[var(--text-secondary)] hover:text-indigo-400'
               }`}
             >
-              {cat}
+              {/* Background Glass */}
+              <div className={`absolute inset-0 border transition-all duration-500 ${
+                active === cat 
+                  ? 'bg-indigo-500/10 border-indigo-500/50 shadow-[0_0_20px_rgba(99,102,241,0.2)]' 
+                  : 'bg-white/5 border-white/10 group-hover:border-indigo-500/30 group-hover:bg-indigo-500/5'
+              }`} />
+            
+              {/* Active Indicator Line */}
+              {active === cat && (
+                <motion.div 
+                  layoutId="active-cat"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.8)]"
+                />
+              )}
+              
+              <span className="relative z-10">{cat}</span>
             </button>
           ))}
         </div>
-
+        <br></br>
         {/* Skills Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <AnimatePresence mode="popLayout">

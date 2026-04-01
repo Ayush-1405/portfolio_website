@@ -54,7 +54,7 @@ export default function Education() {
               viewport={{ once: true, margin: '-60px' }}
               transition={{ delay: i * 0.15, duration: 0.7 }}
               whileHover={{ y: -8 }}
-              className="glass-card rounded-3xl overflow-hidden border border-white/5 hover:border-indigo-500/30 transition-all duration-300 group h-full flex flex-col"
+              className="glass-card overflow-hidden border border-white/5 hover:border-indigo-500/30 transition-all duration-300 group h-full flex flex-col"
             >
               {/* Header gradient */}
               <div className={`bg-gradient-to-br ${edu.gradient} p-8 relative overflow-hidden shrink-0`}>
@@ -66,8 +66,8 @@ export default function Education() {
                 
                 <div className="relative z-10 min-h-[5rem] flex flex-col justify-end">
                   {edu.status === 'Ongoing' && (
-                    <div className="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full w-fit mb-4 border border-white/20">
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-300 animate-pulse" />
+                    <div className="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md px-3 py-1 w-fit mb-4 border border-white/20">
+                      <span className="w-1.5 h-1.5 bg-green-300 animate-pulse" />
                       <span className="text-white text-[10px] font-bold uppercase tracking-widest">Ongoing</span>
                     </div>
                   )}
@@ -78,18 +78,18 @@ export default function Education() {
               <div className="p-8 flex flex-col flex-grow">
                 {/* Institution */}
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 shrink-0">
+                  <div className="w-10 h-10 bg-indigo-500/10 flex items-center justify-center text-indigo-400 shrink-0">
                     <FiAward size={20} />
                   </div>
                   <span className="font-space font-bold text-[var(--text-primary)] text-lg leading-tight">{edu.institution}</span>
                 </div>
 
                 <div className="flex flex-wrap gap-5 mb-8 text-xs text-[var(--text-secondary)] font-bold uppercase tracking-widest">
-                  <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-lg">
+                  <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5">
                     <FiCalendar className="text-indigo-500" />
                     <span className="font-code">{edu.duration}</span>
                   </div>
-                  <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-lg">
+                  <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5">
                     <FiMapPin className="text-indigo-500" />
                     <span>{edu.location}</span>
                   </div>
@@ -102,7 +102,7 @@ export default function Education() {
                   {edu.highlights.map(h => (
                     <span
                       key={h}
-                      className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider bg-white/5 border border-white/5 rounded-xl text-[var(--text-secondary)] group-hover:text-indigo-400 group-hover:border-indigo-500/30 transition-colors"
+                      className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider bg-white/5 border border-white/5 text-[var(--text-secondary)] group-hover:text-indigo-400 group-hover:border-indigo-500/30 transition-colors"
                     >
                       {h}
                     </span>

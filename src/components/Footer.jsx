@@ -25,12 +25,12 @@ export default function Footer() {
     <footer className="relative pt-20 pb-10 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent" />
       
-      <div className="container-custom relative z-10">
+        <div className="container-custom relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           {/* Brand Section */}
           <div className="md:col-span-2 space-y-6">
             <a href="#home" className="flex items-center gap-3 group w-fit">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:rotate-12 transition-transform">
+              <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:rotate-12 transition-transform">
                 <FaCode className="text-white text-lg" />
               </div>
               <span className="font-space font-bold text-[var(--text-primary)] text-2xl tracking-tight">
@@ -49,7 +49,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   whileHover={{ y: -3, scale: 1.1 }}
-                  className="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-[var(--text-secondary)] hover:text-indigo-500 border border-white/5 transition-colors"
+                  className="w-10 h-10 glass-card flex items-center justify-center text-[var(--text-secondary)] hover:text-indigo-500 border border-white/5 transition-colors"
                   aria-label={label}
                 >
                   <Icon size={18} />
